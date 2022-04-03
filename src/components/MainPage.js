@@ -1,7 +1,9 @@
-function MainPage () {
-    return(
+function MainPage() {
+    return (
         <div>
-            <h1>Hello World check if commited!</h1>
+            <div></div>
+            <h5>Hello World This was my first commit!</h5>
+            <div></div>
         </div>
     );
 }
