@@ -1,0 +1,15 @@
+
+.icon-img{
+    width: 70px;
+    height: 70px;
+    margin-bottom: 2rem;
+}
+
+.register-ref{
+    width: 70px;
+}
+
+.loginPage{
+    min-height: 100vh;
+    align-items: cenetr;
+}
