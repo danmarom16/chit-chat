@@ -1,4 +1,8 @@
-
+.loginContainer{
+    margin-bottom: 4rem;
+    min-height: 100vh;
+    align-items: center;
+}
 .icon-img{
     width: 70px;
     height: 70px;
@@ -11,5 +15,5 @@
 
 .loginPage{
     min-height: 100vh;
-    align-items: cenetr;
+    
 }

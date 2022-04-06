@@ -1,24 +1,16 @@
 import './App.css';
-
-import MainPage from "./components/MainPage";
-
-import DisplayContacts from './Contacts/Contacts';
-import SignUp from './Sign-up_page.js'
+import React from 'react';
+import MainPage from "./components/mainPage/MainPage";
+import SignUp from './components/signUp/Sign-up_page.js'
+import Login from './components/login/login';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-      <img src="./cumShot.jpg" alt="logo" width="800" />
-      </header>
-      <div>
-      <MainPage />
-      </div>
-      <div>
-        <SignUp />
-        <div></div>
-        <DisplayContacts />
-      </div>
+      <header className="App-header"> App Header text </header>
+      <Login />
+      
+      <MainPage></MainPage>
     </div>
   );
 }

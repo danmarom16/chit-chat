@@ -5,9 +5,8 @@ import './login.css'
 
 function Login() {
     return (
-        <>
-            <Container fluid="true" className="mt-5">
-                <Row className="d-flex justify-content-center ">
+            <Container fluid="true" className="loginContainer">
+                <Row className="justify-content-center ">
 
                     <Col lg={4} md={6} sm={12} className="text-center">
                         <img className="icon-img" src={loginIcon} alt="icon" />
@@ -41,7 +40,6 @@ function Login() {
                     </Col>
                 </Row>
             </Container>
-        </>
     );
 }
 
