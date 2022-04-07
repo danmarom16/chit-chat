@@ -7,7 +7,7 @@ import Login from './components/login/login';
 function App() {
   return (
     <div className="App">
-      <header className="App-header"> App Header text </header>
+      <header className="App-header"> Dan's Commit </header>
       <Login />
       
       <MainPage></MainPage>
