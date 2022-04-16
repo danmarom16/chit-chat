@@ -1,6 +1,6 @@
 .sidebar{
     display: flex;
-    flex: 0.35;
+    flex: 0.3;
     flex-direction: column;
 }
 
@@ -31,4 +31,15 @@
     background-color: white;
     flex:1;
     overflow-y: scroll;
+}
+
+input{
+    border: 1px solid lightgray;
+    height: 60%;
+}
+
+input, ::-webkit-input-placeholder {
+    font-size: small;
+    width: 98%;
+    text-align: center;
 }

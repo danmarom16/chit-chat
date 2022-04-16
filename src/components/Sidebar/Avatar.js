@@ -7,7 +7,7 @@ class Avatar extends Component {
   render() {
     return (
       <div>
-        <Image
+        <Image width={"40px"} height={"40px"}
           roundedCircle
           fluid
           src={this.props.imgSrc}

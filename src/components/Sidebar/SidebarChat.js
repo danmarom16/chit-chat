@@ -8,7 +8,7 @@ function SidebarChat() {
       <Avatar imgSrc='https://placeimg.com/50/50/people'/>
       <div className='sidebar-chat-info'>
             <h2>Friend Name</h2>
-            <p> The king is back</p>
+            <h3> The king is back</h3>
       </div>
     </div>
   )
