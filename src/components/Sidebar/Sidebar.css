@@ -1,9 +1,34 @@
 .sidebar{
-    flex:1;
+    display: flex;
+    flex: 0.35;
+    flex-direction: column;
 }
 
 .sidebar-header{
     display: flex;
-    justify-self: space-between;
     padding: 20px;
+    border-right: 1px solid lightgray;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-header-right{
+    justify-content: space-between;
+    padding: 0%;
+    align-items: center;
+}
+
+.sidebar-search{
+    max-width: 98%;
+    display: flex;
+    align-items: center;
+    background-color: #f6f6f6;
+}
+
+.sidebar-chats{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    flex:1;
+    overflow-y: scroll;
 }
