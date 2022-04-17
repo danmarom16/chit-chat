@@ -1,66 +1,119 @@
-import React, { useState } from 'react'
-import './Chat.css'
-import Avatar from '../sidebar/Avatar'
-import Message from './Message'
+import React, { useState } from "react";
+import "./Chat.css";
+import Avatar from "../sidebar/Avatar";
+import Message from "./Message";
+import { Dropdown } from "react-bootstrap";
 
 function Chat() {
-    const [msg, setMsg] = useState("")
+  const [msg, setMsg] = useState("");
 
-    const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState([]);
 
-    const sendMessage = (e) => {
-        e.preventDefault();
-        var today = new Date();
-        var currentHour = today.getHours() + ":" + today.getMinutes();
-        setMessages([...messages, {content: msg, time: currentHour}]);
-        setMsg("");
-    }
+  const sendMessage = (e) => {
+    e.preventDefault();
+    var today = new Date();
+    var currentHour = today.getHours() + ":" + today.getMinutes();
+    setMessages([...messages, { content: msg, time: currentHour }]);
+    setMsg("");
+  };
 
-    const messagesList = messages.map((message, key) => {
-        return <Message content={message.content} time={message.time} isReciever={true} key={key} />
-    })
 
+  const messagesList = messages.map((message, key) => {
     return (
-        <div className="chat">
+      <Message
+        content={message.content}
+        time={message.time}
+        isReciever={true}
+        key={key}
+      />
+    );
+  });
 
+  const hiddenFileInput = React.useRef(null);
+  
+  const handleClick = (e) => {
+        hiddenFileInput.current.click();
+  }
+  const uploadFile = (e) => {
+    e.preventDefault();
+    var today = new Date();
+    var file = e.fileUploaded;
+    var currentHour = today.getHours() + ":" + today.getMinutes();
+    setMessages([...messages, { content: file, time: currentHour }]);
+  }
 
-            <div className='chat-header'>
-                <Avatar imgSrc='https://placeimg.com/50/50/people'></Avatar>
+  const handleChange = (e) => {
+    const fileUploaded = e.target.files[0];
+    uploadFile(fileUploaded);
 
-                <div className='chat-header-info'>
-                    <h3> Friend name</h3>
-                    <p> Last seen at...</p>
-                </div>
+  };
 
-                <div className='chat-header-right'>
-                    <button className="btn btn-light btn-sm">
-                        <i className="bi bi-search"></i>
-                    </button>
-                    <button className="btn btn-light btn-sm">
-                        <i className="bi bi-three-dots-vertical"></i>
-                    </button>
+  return (
+    <div className="chat">
+      <div className="chat-header">
+        <Avatar imgSrc="https://placeimg.com/50/50/people"></Avatar>
 
-                </div>
-            </div>
-
-            <div className='chat-body'>
-                <Message content="suprise suprise mf" time="3:52"/>
-                <Message content="THE KING IS BACK" time="3:53"/>
-                {messagesList}
-            </div>
-
-            <div className='chat-footer'>
-                <form onSubmit={sendMessage}>
-                    <button className='bi bi-paperclip'></button>
-                    <input value={msg}
-                        onChange={(e) => setMsg(e.target.value)}
-                        type="text" placeholder='Type a message' ></input>
-                    <button type='submit' onSubmit={sendMessage}> <i className="bi bi-send"></i></button>
-                </form>
-            </div>
-
+        <div className="chat-header-info">
+          <h3> Friend name</h3>
+          <p> Last seen at...</p>
         </div>
-    )
+
+        <div className="chat-header-right">
+          <button className="btn btn-light btn-sm">
+            <i className="bi bi-search"></i>
+          </button>
+          <button className="btn btn-light btn-sm">
+            <i className="bi bi-three-dots-vertical"></i>
+          </button>
+        </div>
+      </div>
+
+      <div className="chat-body">
+        <Message content="suprise suprise mf" time="3:52" />
+        <Message content="THE KING IS BACK" time="3:53" />
+        {messagesList}
+      </div>
+
+      <div className="chat-footer">
+        <Dropdown drop="up">
+          <Dropdown.Toggle variant="light-gray" id="dropdown-basic">
+            <i className="bi bi-paperclip"></i>
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">
+                <form>
+                    <input type="file" multiple accept="image/*" style={{display:'none'}} ref={hiddenFileInput} onChange={handleChange}/>
+                        <button className="upload-photo" onClick={handleClick}><i className="bi bi-image" /></button>
+                </form>
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-2">
+              <i className="bi bi-mic" />
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-3">
+              <i className="bi bi-camera-reels" />
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-3">
+              <i className="bi bi-geo-alt" />
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+
+        <form onSubmit={sendMessage}>
+          <input
+            value={msg}
+            onChange={(e) => setMsg(e.target.value)}
+            type="text"
+            placeholder="Type a message"
+          ></input>
+          <button type="submit" onSubmit={sendMessage}>
+            {" "}
+            <i className="bi bi-send"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 }
 
-export default Chat
+export default Chat;
