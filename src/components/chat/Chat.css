@@ -105,12 +105,3 @@
 .dropdown-menu.show {
     display: flex;
   }
-
-  
-.upload-photo{
-    padding-left: 5px;
-    padding-right: 5px;
-    border: none;
-    width: fit-content;
-    background-color: transparent;
-}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./Chat.css";
 import Avatar from "../sidebar/Avatar";
 import Message from "./Message";
@@ -6,8 +6,8 @@ import { Dropdown } from "react-bootstrap";
 
 function Chat() {
   const [msg, setMsg] = useState("");
-
   const [messages, setMessages] = useState([]);
+
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -29,24 +29,7 @@ function Chat() {
     );
   });
 
-  const hiddenFileInput = React.useRef(null);
-  
-  const handleClick = (e) => {
-        hiddenFileInput.current.click();
-  }
-  const uploadFile = (e) => {
-    e.preventDefault();
-    var today = new Date();
-    var file = e.fileUploaded;
-    var currentHour = today.getHours() + ":" + today.getMinutes();
-    setMessages([...messages, { content: file, time: currentHour }]);
-  }
 
-  const handleChange = (e) => {
-    const fileUploaded = e.target.files[0];
-    uploadFile(fileUploaded);
-
-  };
 
   return (
     <div className="chat">
@@ -82,10 +65,7 @@ function Chat() {
 
           <Dropdown.Menu>
             <Dropdown.Item href="#/action-1">
-                <form>
-                    <input type="file" multiple accept="image/*" style={{display:'none'}} ref={hiddenFileInput} onChange={handleChange}/>
-                        <button className="upload-photo" onClick={handleClick}><i className="bi bi-image" /></button>
-                </form>
+                    <input type="file" name="upload photo" multiple accept="image/*"/>
             </Dropdown.Item>
             <Dropdown.Item href="#/action-2">
               <i className="bi bi-mic" />
