@@ -1,18 +1,21 @@
+import React from 'react';
 import { useState } from "react";
 import "./Register.css";
 import FormInput from '../formInput/FormInput'
 import { Col, Row } from "react-bootstrap";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
+import {db} from "../DataBase.js"
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [values, setValues] = useState({
     username: "",
     displayName: "",
-    photo: "", // we will have to edit this.
+    imgUrl: null, // we will have to edit this.
     password: "",
     confirmPassword: "",
   });
-
+  const navigate = useNavigate();
   const inputs = [
     {
       id: 1,
@@ -38,7 +41,8 @@ const Register = () => {
     {
       id: 3,
       name: "photo",
-      type: "file",  // should be img
+      type: "file",
+      accept: "image/*",
       placeholder: "Photo",
       label: "Photo",
     },
@@ -67,6 +71,16 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (db[values.username] === undefined) {
+      db[values.username] = 
+        {displayName: values.displayName, imgUrl: values.imgUrl, password: values.password};
+        console.log("added");
+        navigate("/");
+    }
+    else{
+      console.log("already exists");
+    }
+    console.log(db)
   };
 
   const onChange = (e) => {
@@ -75,27 +89,26 @@ const Register = () => {
 
   return (
     <div className="register">
-      <form className="animated" onSubmit={handleSubmit}>
-        <h1>Register</h1>
+      <form className="animated register-form" onSubmit={handleSubmit}>
+        <h1 className='register-title'>Register</h1>
         {inputs.map((input) => (
-          <FormInput
-            key={input.id}
-            {...input}
+          <FormInput key={input.id} {...input}
             value={values[input.name]}
             onChange={onChange}
           />
         ))}
-        <button>Submit</button>
+        <button className='register-button'>Submit</button>
         <Row className="register-line mb-2">
-        <Col>
+          <Col>
             Not registered yet?
-        </Col>
-        <Col>
-        <Link to="/">Click Here.</Link>
-        </Col>
-    </Row>
+          </Col>
+          <Col>
+            <Link to="/">Click Here.</Link>
+          </Col>
+        </Row>
       </form>
     </div>
+    
   );
 };
 

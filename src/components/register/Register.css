@@ -1,39 +1,43 @@
 .register {
     display: flex;
+    flex: 1;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
+    align-content: center;
+    overflow-y: scroll;
 }
-  
-  form{
-      background-color: rgb(237, 239, 231);
-      padding: 0px 60px;
-      border-radius: 10px;
-      animation: transitionIn 0.75s;
-      margin-top: 40px;
-  }
-  
-  h1{
-      color: rgb(85, 123, 131);
-      text-align: center;
-      font-weight: 700;
-  }
-  
-  button{
-      width: 100%;
-      height: 50px;
-      padding: 10px;
-      border: none;
-      background-color: rgb(85, 123, 131);
-      color: rgb(237, 239, 231);
-      border-radius: 5px;
-      font-weight: bold;
-      font-size: 18px;
-      cursor: pointer;
-      margin-top: 15px;
-      margin-bottom: 30px;
-  }
 
+  
+.register-form{
+    padding: 10px 40px;
+    border-radius: 10px;
+    animation: transitionIn 0.75s;
+    margin: 10px 0px;
+    background-color: #01252c;
+}
+
+
+.submit-button{
+    width: 100%;
+    max-height: 50px;
+    padding: 3px;
+    border: none;
+    background-color: rgb(85, 123, 131);
+    color: rgb(237, 239, 231);
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: medium;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+  h1{
+    color: rgb(85, 123, 131);
+    text-align: center;
+    font-weight: 700;
+    font-size: x-large;
+}
 
   @keyframes transitionIn {
     from{
@@ -44,4 +48,24 @@
         opacity: 1;
         transform: rotateX(0);
     }
+}
+.register-title{
+    color: rgb(237, 239, 231);
+    text-align: center;
+    font-weight: 650;
+}
+
+.register-button{
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border: none;
+    background-color: rgb(237, 239, 231);
+    color: #043e4a;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-bottom: 30px;
 }

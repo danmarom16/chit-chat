@@ -3,20 +3,22 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+
   }
   
   .login-form{
-    background-color: #557B83;
+    background-color: #01252c;
     padding: 0px 60px;
     border-radius: 10px;
     animation: transitionIn 0.75s;
     margin-top: 40px;
+    
   }
 
   .login-title{
       color: rgb(237, 239, 231);
       text-align: center;
-      font-weight: 700;
+      font-weight: 650;
   }
   
   .login-button{
@@ -25,7 +27,7 @@
       padding: 10px;
       border: none;
       background-color: rgb(237, 239, 231);
-      color: rgb(85, 123, 131);
+      color: #043e4a;
       border-radius: 5px;
       font-weight: bold;
       font-size: 18px;
@@ -55,10 +57,9 @@
     padding: 0;
 }
 
-.registration-button{
+.to-registration{
     text-decoration: underline;
     justify-self: start;
     align-self: start;
-    border: none;
-    background-color: transparent;
 }
+

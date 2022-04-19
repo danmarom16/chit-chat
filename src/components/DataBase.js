@@ -9,16 +9,19 @@ db["adesanya"] = {displayName: "IZZY", imgUrl: {img3}, password: "12345678!a"};
 
 function searchInDb(values){
     if (db[values.username] === undefined) {
-        alert('fuck you username not right');
+        alert('Wrong password or username');
         return false;
     }
     else{
         if(db[values.username].password != values.password){
-            alert('fuck you password not right');
+            alert('Wrong password or username');
             return false;
         }
     }
     return true;
   };
 
-export default searchInDb;
+export {
+    db,
+    searchInDb
+}

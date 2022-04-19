@@ -1,20 +1,21 @@
+import React from "react";
 import { useState } from "react";
-import "./login.css";
+import "./Login.css";
 import FormInput from '../formInput/FormInput'
-import '../formInput/FormInput.css'
 import { Col, Row } from "react-bootstrap";
-import {Link, Navigate} from 'react-router-dom'
-import searchInDb from '../DataBase'
+import { Link } from "react-router-dom"
+import { searchInDb } from "../DataBase";
 import { useNavigate } from "react-router-dom";
 
-const Login = (props) => {
+const Login = () => {
   const [values, setValues] = useState({
     username: "",
     displayName: "",
+    photo: "", // we will have to edit this.
     password: "",
+    confirmPassword: "",
   });
 
-  const navigate = useNavigate();
   const inputs = [
     {
       id: 1,
@@ -40,15 +41,17 @@ const Login = (props) => {
     },
   ];
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if(searchInDb(values)){
-        navigate('/chat');
+      console.log('user is registered');
+      navigate("/dashboard");
     }
-    else{
-        // show error
-    }
- };
+    else
+      console.log('not regiestered')
+  };
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -59,7 +62,7 @@ const Login = (props) => {
       <form className="animated login-form" onSubmit={handleSubmit}>
         <h1 className="login-title">Login Page</h1>
         {inputs.map((input) => (
-          <FormInput
+          <FormInput className="login-form-input"
             key={input.id}
             {...input}
             value={values[input.name]}

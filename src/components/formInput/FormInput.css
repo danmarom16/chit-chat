@@ -2,14 +2,12 @@
     display: flex;
     flex-direction: column;
     width: 280px;
-    background-color: #557B83;
-    
+    background-color: #01252c;
 }
 
-
 input{
-    padding: 15px;
-    margin: 10px 0px;
+    padding: 5px;
+    margin: 7px 0px;
     border-radius: 5px;
     border: 1px solid gray;
     background-color: rgb(237, 239, 231);
