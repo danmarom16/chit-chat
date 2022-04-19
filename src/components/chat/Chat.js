@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import "./Chat.css";
 import Avatar from "../sidebar/Avatar";
 import Message from "./Message";

@@ -1,5 +1,5 @@
 .app{
-  background-color: #dadbd3;
+  background-color: #557B83;
   display: grid;
   place-items: center;
   height: 100vh;
@@ -8,10 +8,10 @@
 
 .app-body{
   display: flex;
-  background-color: #ededed;
+  background-color: rgb(237, 239, 231);
   height: 90vh;
   width: 90vw;
   box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.7);
   margin-top: -30px;
-  
+  justify-content: center;
 }
