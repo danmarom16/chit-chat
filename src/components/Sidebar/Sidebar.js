@@ -17,9 +17,6 @@ function Sidebar() {
           <button className="btn btn-light btn-sm">
             <i className="bi bi-chat-left-text-fill"></i>
           </button>
-          <button className="btn btn-light btn-sm">
-            <i className="bi bi-three-dots-vertical"></i>
-          </button>
         </div>
       </div>
       <div className="sidebar-search">

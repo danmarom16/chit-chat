@@ -44,14 +44,6 @@ function Chat() {
           <p> Last seen at...</p>
         </div>
 
-        <div className="chat-header-right">
-          <button className="btn btn-light btn-sm">
-            <i className="bi bi-search"></i>
-          </button>
-          <button className="btn btn-light btn-sm">
-            <i className="bi bi-three-dots-vertical"></i>
-          </button>
-        </div>
       </div>
 
       <div className="chat-body">
