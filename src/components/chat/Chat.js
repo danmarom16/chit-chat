@@ -59,7 +59,7 @@ function Chat() {
         <Message content="THE KING IS BACK" time="3:53" />
         {messagesList}
       </div>
-
+  
       <div className="chat-footer">
         <Dropdown drop="up">
           <Dropdown.Toggle variant="light-gray" id="dropdown-basic">
