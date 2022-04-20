@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Chat.css";
 import Avatar from "../sidebar/Avatar";
 import Message from "./Message";
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, Modal } from "react-bootstrap";
 
 function Chat() {
   const [msg, setMsg] = useState("");
@@ -32,8 +32,6 @@ function Chat() {
     );
   });
 
-
-
   return (
     <div className="chat">
       <div className="chat-header">
@@ -60,7 +58,7 @@ function Chat() {
 
           <Dropdown.Menu>
             <Dropdown.Item href="#/action-1">
-                    <input type="file" name="upload photo" multiple accept="image/*"/>
+                    <i class="bi bi-image-fill"></i>
             </Dropdown.Item>
             <Dropdown.Item href="#/action-2">
               <i className="bi bi-mic" />

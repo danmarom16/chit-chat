@@ -7,21 +7,35 @@ db["asi"] = {displayName: "Asafm", imgUrl: {img1}, password: "12345678!a"};
 db["dani"] = {displayName: "DanM", imgUrl: {img2}, password: "12345678!a"};
 db["adesanya"] = {displayName: "IZZY", imgUrl: {img3}, password: "12345678!a"};
 
+function usernameExists(username){
+    if (db[username] === undefined){
+        return false;
+    } 
+    return true;
+}
+
 function searchInDb(values){
-    if (db[values.username] === undefined) {
-        alert('Wrong password or username');
+    if (! usernameExists(values.username)) {
+        alert('Username does not exists');
         return false;
     }
-    else{
-        if(db[values.username].password != values.password){
-            alert('Wrong password or username');
+    else if(db[values.username].password != values.password){
+            alert('Wrong password');
             return false;
         }
-    }
     return true;
   };
 
+  function getData(username){
+      if(usernameExists(username)){
+          return db[username]
+      }
+      return null;
+  }
+
 export {
     db,
-    searchInDb
+    searchInDb,
+    usernameExists,
+    getData
 }
