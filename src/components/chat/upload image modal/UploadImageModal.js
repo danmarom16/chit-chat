@@ -25,7 +25,7 @@ function UploadImageModal({sendImage}) {
 
   return (
     <>
-    <button id="addContact" className="btn btn-sm" onClick={handleShow}>
+    <button className="btn btn-sm" onClick={handleShow}>
     <i className="bi bi-image"></i>
   </button>
 
@@ -35,7 +35,7 @@ function UploadImageModal({sendImage}) {
       </Modal.Header>
       <Modal.Body>
         <Form > 
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Group className="mb-3">
             <Form.Control
               type="file"
               onChange={uploadImage}

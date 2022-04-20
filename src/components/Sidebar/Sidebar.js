@@ -38,7 +38,7 @@ function Sidebar({name}) {
         {name}
         </div>
         <div xl={3} md={3} sm={3} xs={3} className="sidebar-header-right">
-          <button id="addContact" className="btn btn-light btn-sm" onClick={() => setModalOpen(true)}>
+          <button id="addContact" className="btn btn-sm" onClick={() => setModalOpen(true)}>
             <i className="bi bi-person-plus-fill"></i>
           </button>
         </div>
