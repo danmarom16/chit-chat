@@ -7,6 +7,11 @@ db["asi"] = {displayName: "Asafm", imgUrl: {img1}, password: "12345678!a"};
 db["dani"] = {displayName: "DanM", imgUrl: {img2}, password: "12345678!a"};
 db["adesanya"] = {displayName: "IZZY", imgUrl: {img3}, password: "12345678!a"};
 
+const dbChats={}
+dbChats["alice123"] = {displayName: "Alice", lastMessage: "Suprise Suprise MF"}
+dbChats["bob2"] = {displayName: "Bob", lastMessage: "THE KING IS BACK"}
+dbChats["masvidal1"] = {displayName: "Masvidal", lastMessage: "I'm in jail"}
+
 function usernameExists(username){
     if (db[username] === undefined){
         return false;
@@ -35,6 +40,7 @@ function searchInDb(values){
 
 export {
     db,
+    dbChats,
     searchInDb,
     usernameExists,
     getData

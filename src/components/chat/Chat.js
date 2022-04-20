@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Chat.css";
 import Avatar from "../sidebar/Avatar";
 import Message from "./Message";
-import { Dropdown, Modal } from "react-bootstrap";
+import { Dropdown} from "react-bootstrap";
 
 function Chat() {
   const [msg, setMsg] = useState("");

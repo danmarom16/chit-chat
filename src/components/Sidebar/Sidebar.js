@@ -4,10 +4,27 @@ import SidebarChat from "./SidebarChat";
 import Avatar from "./Avatar";
 import { Modal } from "react-bootstrap"
 import NewContactModal from './newContactModal';
+import { dbChats } from "../DataBase";
 
 function Sidebar({name}) {
-  const [modalOpen, setModalOpen] = useState(false)
 
+  const [chats, setChats] = useState(dbChats)
+
+    const contactList = Object.keys(chats).map((chat, key) => {
+      return(
+    (<SidebarChat
+    displayName={chats[chat].displayName}
+    lastMessage={chats[chat].lastMessage}
+    key={key}/>)  
+    );
+    }
+    )
+
+
+
+
+  // newChat
+  const [modalOpen, setModalOpen] = useState(false)
   function closeModal() {
       setModalOpen(false)
   }
@@ -33,15 +50,8 @@ function Sidebar({name}) {
       </input>
       </div>
       <div className="sidebar-chats"> 
-        <SidebarChat/>
-        <SidebarChat/>
-        <SidebarChat/>
-        <SidebarChat/>
-        <SidebarChat/>
-        <SidebarChat/>
-        <SidebarChat/>
-        <SidebarChat/>
-        <SidebarChat/>
+        {contactList}
+        
       </div>
       <Modal show={modalOpen} onHide={closeModal}>
       <NewContactModal closeModal={closeModal} />
