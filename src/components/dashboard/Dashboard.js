@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Sidebar from '../sidebar/Sidebar'
 import Chat from '../chat/Chat'
 
-function Dashboard() {
+function Dashboard({name}) {
+
   return (
     <>
-        <Sidebar/>
+        <Sidebar name={name}/>
         <Chat/>
     </>
   );

@@ -7,14 +7,14 @@ import { Link } from "react-router-dom"
 import { searchInDb } from "../DataBase";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+
+// onLoginSubmit is a setter for the user's data
+const Login = ( {setUserData} ) => {
   const [values, setValues] = useState({
     username: "",
-    displayName: "",
-    photo: "", // we will have to edit this.
     password: "",
-    confirmPassword: "",
   });
+  const navigate = useNavigate();
 
   const inputs = [
     {
@@ -29,7 +29,7 @@ const Login = () => {
       required: true,
     },
     {
-      id: 4,
+      id: 2,
       name: "password",
       type: "password",
       placeholder: "Password",
@@ -41,12 +41,11 @@ const Login = () => {
     },
   ];
 
-  const navigate = useNavigate();
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if(searchInDb(values)){
       console.log('user is registered');
+      setUserData(values.username)
       navigate("/dashboard");
     }
     else
