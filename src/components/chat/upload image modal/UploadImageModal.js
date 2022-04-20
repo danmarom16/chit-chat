@@ -25,9 +25,9 @@ function UploadImageModal({sendImage}) {
 
   return (
     <>
-    <Button variant="light" onClick={handleShow}>
-      Launch demo modal
-    </Button>
+    <button id="addContact" className="btn btn-sm" onClick={handleShow}>
+    <i className="bi bi-image"></i>
+  </button>
 
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>

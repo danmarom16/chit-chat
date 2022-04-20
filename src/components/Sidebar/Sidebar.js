@@ -21,8 +21,6 @@ function Sidebar({name}) {
     )
 
 
-
-
   // newChat
   const [modalOpen, setModalOpen] = useState(false)
   function closeModal() {
