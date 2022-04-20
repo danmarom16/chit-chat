@@ -5,13 +5,12 @@ import Avatar from "./Avatar";
 import { Modal } from "react-bootstrap"
 import NewContactModal from './newContactModal';
 
-function Sidebar() {
+function Sidebar({name}) {
   const [modalOpen, setModalOpen] = useState(false)
 
   function closeModal() {
       setModalOpen(false)
   }
-
 
 
   return (
@@ -21,7 +20,7 @@ function Sidebar() {
         <Avatar imgSrc='https://placeimg.com/50/50/people'></Avatar>
         </div>
         <div xl={3} md={3} sm={3} xs={3}>
-        Masvidal
+        {name}
         </div>
         <div xl={3} md={3} sm={3} xs={3} className="sidebar-header-right">
           <button id="addContact" className="btn btn-light btn-sm" onClick={() => setModalOpen(true)}>
