@@ -1,17 +1,27 @@
 import {React, useState} from 'react'
 import { Button, Modal, Form } from "react-bootstrap";
 
-function UploadImageModal() {
+
+function UploadImageModal({sendImage}) {
+
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [image, setImage] = useState();
+
 
     const uploadImage = e => {
-        console.log(e.target.files[0])
-        setShow(false)
+      var imgSrc = URL.createObjectURL(e.target.files[0]);
+      setImage(imgSrc)
+
     }
 
+    const handleSendImage = e => {
+      if(image != null){
+        sendImage(image)
+        setShow(false)
+      }
+    }
 
   return (
     <>
@@ -28,19 +38,15 @@ function UploadImageModal() {
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Control
               type="file"
-              autoFocus
-              val
-              onChange={(e) => setSelectedFile(e.target.files[0])}
+              onChange={uploadImage}
+              accept="image/*"
             />
           </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={uploadImage}>
-          Save Changes
+        <Button variant="secondary" onClick={handleSendImage}>
+          Send
         </Button>
       </Modal.Footer>
     </Modal>
