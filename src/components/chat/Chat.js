@@ -11,10 +11,13 @@ function Chat() {
 
   const sendMessage = (e) => {
     e.preventDefault();
+    if (msg != ""){
     var today = new Date();
     var currentHour = today.getHours() + ":" + today.getMinutes();
     setMessages([...messages, { content: msg, time: currentHour }]);
+    console.log(currentHour);
     setMsg("");
+    }
   };
 
 
@@ -58,26 +61,7 @@ function Chat() {
       </div>
 
       <div className="chat-footer">
-        <Dropdown drop="up">
-          <Dropdown.Toggle variant="light-gray" id="dropdown-basic">
-            <i className="bi bi-paperclip"></i>
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">
-                    <input type="file" name="upload photo" multiple accept="image/*"/>
-            </Dropdown.Item>
-            <Dropdown.Item href="#/action-2">
-              <i className="bi bi-mic" />
-            </Dropdown.Item>
-            <Dropdown.Item href="#/action-3">
-              <i className="bi bi-camera-reels" />
-            </Dropdown.Item>
-            <Dropdown.Item href="#/action-3">
-              <i className="bi bi-geo-alt" />
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        
 
         <form onSubmit={sendMessage}>
           <input

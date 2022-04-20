@@ -44,6 +44,7 @@
 }
 
 .chat-message{
+    display: flexbox;
     position: relative;
     padding: 10px;
     background-color: #ffffff;
@@ -55,6 +56,8 @@
 .chat-timestamp{
     margin-left: 10px;
     font-size: xx-small;
+    display:inline-flex;
+    color: #000;
 }
 
 .chat-reciver{
