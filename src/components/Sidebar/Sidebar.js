@@ -1,9 +1,19 @@
 import "./Sidebar.css";
-import React from "react";
+import React, { useState } from "react";
 import SidebarChat from "./SidebarChat";
 import Avatar from "./Avatar";
+import { Modal } from "react-bootstrap"
+import NewContactModal from './newContactModal';
 
 function Sidebar() {
+  const [modalOpen, setModalOpen] = useState(false)
+
+  function closeModal() {
+      setModalOpen(false)
+  }
+
+
+
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -14,8 +24,8 @@ function Sidebar() {
         Masvidal
         </div>
         <div xl={3} md={3} sm={3} xs={3} className="sidebar-header-right">
-          <button className="btn btn-light btn-sm">
-            <i className="bi bi-chat-left-text-fill"></i>
+          <button id="addContact" className="btn btn-light btn-sm" onClick={() => setModalOpen(true)}>
+            <i className="bi bi-person-plus-fill"></i>
           </button>
         </div>
       </div>
@@ -34,6 +44,9 @@ function Sidebar() {
         <SidebarChat/>
         <SidebarChat/>
       </div>
+      <Modal show={modalOpen} onHide={closeModal}>
+      <NewContactModal closeModal={closeModal} />
+  </Modal>
     </div>
   );
 }
