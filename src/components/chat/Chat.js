@@ -2,24 +2,25 @@ import React, { useState } from "react";
 import "./Chat.css";
 import Avatar from "../sidebar/Avatar";
 import Message from "./Message";
-import { Dropdown } from "react-bootstrap";
+import { Dropdown} from "react-bootstrap";
+import UploadImageModal from "./upload image modal/UploadImageModal";
 
 function Chat() {
+
+
   const [msg, setMsg] = useState("");
   const [messages, setMessages] = useState([]);
 
-
   const sendMessage = (e) => {
     e.preventDefault();
-    if (msg != ""){
-    var today = new Date();
-    var currentHour = today.getHours() + ":" + today.getMinutes();
-    setMessages([...messages, { content: msg, time: currentHour }]);
-    console.log(currentHour);
-    setMsg("");
+    if (msg != "") {
+      var today = new Date();
+      var currentHour = today.getHours() + ":" + today.getMinutes();
+      setMessages([...messages, { content: msg, time: currentHour }]);
+      console.log(currentHour);
+      setMsg("");
     }
   };
-
 
   const messagesList = messages.map((message, key) => {
     return (
@@ -32,8 +33,6 @@ function Chat() {
     );
   });
 
-
-
   return (
     <div className="chat">
       <div className="chat-header">
@@ -43,7 +42,6 @@ function Chat() {
           <h3> Friend name</h3>
           <p> Last seen at...</p>
         </div>
-
       </div>
 
       <div className="chat-body">
@@ -51,16 +49,15 @@ function Chat() {
         <Message content="THE KING IS BACK" time="3:53" />
         {messagesList}
       </div>
-  
+
       <div className="chat-footer">
         <Dropdown drop="up">
           <Dropdown.Toggle variant="light-gray" id="dropdown-basic">
             <i className="bi bi-paperclip"></i>
           </Dropdown.Toggle>
-
           <Dropdown.Menu>
             <Dropdown.Item href="#/action-1">
-                    <input type="file" name="upload photo" multiple accept="image/*"/>
+              <UploadImageModal/>
             </Dropdown.Item>
             <Dropdown.Item href="#/action-2">
               <i className="bi bi-mic" />
