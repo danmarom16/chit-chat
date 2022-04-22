@@ -4,18 +4,20 @@ import SidebarChat from "./SidebarChat";
 import Avatar from "./Avatar";
 import { Modal } from "react-bootstrap";
 import NewContactModal from "./newContactModal";
-import { getChats, getDisplayName, getLastMessage, getProfileImage, message_list } from "../DataBase";
+import { getChats, getDisplayName, getLastMessage, getProfileImage } from "../DataBase";
 
-function Sidebar({ username }) {
+function Sidebar({ username, handleSidebarClick }) {
   const [chats, setChats] = useState(getChats);
-
 
   const contactList = Object.keys(chats).map((friendUsername, key) => {
     return (
       <SidebarChat
-        displayName={getDisplayName[friendUsername]}
-        lastMessage={getLastMessage[friendUsername]}
+        displayName={getDisplayName(friendUsername)}
+        lastMessage={getLastMessage(friendUsername)}
+        profilePicture = {getProfileImage(friendUsername)}
+        myUsername = {friendUsername}
         key={key}
+        handleClick={handleSidebarClick}
       />
     );
   });

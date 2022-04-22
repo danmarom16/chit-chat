@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Chat.css";
 import Avatar from "../sidebar/Avatar";
 import Message from "./Message";
 import UploadImageModal from "./upload image modal/UploadImageModal"
-import { Dropdown, Modal } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
+import {getChats, getDisplayName, getProfileImage, /*addMessageToDatabase*/} from '../DataBase'
 
-function Chat() {
-
+function Chat({friendUsername}) {
 
   const [msg, setMsg] = useState("");
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState(getChats()[friendUsername]);
+
+  useEffect(() => {
+    setMessages(getChats()[friendUsername]);
+  }, [friendUsername]);
 
   function sendImage (imgSrc){
     var today = new Date();
@@ -23,7 +27,8 @@ function Chat() {
     if (msg != "") {
       var today = new Date();
       var currentHour = today.getHours() + ":" + today.getMinutes();
-      setMessages([...messages, { content: msg, time: currentHour }]);
+      // addMessageToDatabase({ content: msg, time: currentHour, isReciever: true })
+      setMessages([...messages, { content: msg, time: currentHour, isRecieve: true }]);
       setMsg("");
     }
   };
@@ -33,7 +38,7 @@ function Chat() {
       <Message
         content={message.content}
         time={message.time}
-        isReciever={true}
+        isReciever={message.isReciever}
         key={key}
         type={message.type}
       />
@@ -42,19 +47,16 @@ function Chat() {
 
   return (
     <div className="chat">
+    {console.log(messages)}
       <div className="chat-header">
-        <Avatar imgSrc="https://placeimg.com/50/50/people"></Avatar>
+        <Avatar imgSrc={getProfileImage(friendUsername)}></Avatar>
 
         <div className="chat-header-info">
-          <h3> Friend name</h3>
-          <p> Last seen at...</p>
+          <h3>{getDisplayName(friendUsername)}</h3>
         </div>
       </div>
 
       <div className="chat-body">
-        <Message content="suprise suprise mf" time="3:52" />
-        <Message content="THE KING IS BACK" time="3:53" />
-
         {messagesList}
       </div>
 

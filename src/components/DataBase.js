@@ -22,14 +22,14 @@ db_profile_pictures["asi"] = img_asi;
 db_profile_pictures["dani"] = img_dani;
 db_profile_pictures["adesanya"] = img_adesanya;
 db_profile_pictures["connor"] = img_connor;
-db_profile_pictures["chimaiev"] = img_chimaiev;
+db_profile_pictures["chamzat"] = img_chimaiev;
 
 const db_passwords = {};
 db_passwords["asi"] = "12345678!a";
 db_passwords["dani"] = "12345678!a";
 db_passwords["adesanya"] = "12345678!a";
 db_passwords["connor"] = "12345678!a";
-db_passwords["chimaiev"] = "12345678!a";
+db_passwords["chamzat"] = "12345678!a";
 
 const message_list = {};
 
@@ -39,13 +39,13 @@ message_list["connor"] = [
 ];
 
 message_list["adesanya"] = [
-  { content: "suprise suprise mf", time: "3:50", isReciever: false },
-  { content: "THE KING IS BACK", time: "3:50", isReciever: false },
+  { content: "suprise suprise mf", time: "12:21", isReciever: false },
+  { content: "THE KING IS BACK", time: "12:31", isReciever: false },
 ];
 
-message_list["chimaiev"] = [
-  { content: "suprise suprise mf", time: "3:50", isReciever: false },
-  { content: "THE KING IS BACK", time: "3:50", isReciever: false },
+message_list["chamzat"] = [
+  { content: "suprise suprise mf", time: "23:50", isReciever: false },
+  { content: "THE KING IS BACK", time: "23:50", isReciever: false },
 ];
 
 function isUsernameExists(username) {
@@ -81,14 +81,13 @@ function getChats() {
 }
 
 function getLastMessage(username) {
-  return message_list[username][-1];
+  return message_list[username].at(-1);
 }
 
 function createNewUser({ username, displayName, profilePic, password }) {
   if (!isUsernameExists(username)) {
     db_display_names[username] = displayName;
     db_profile_pictures[username] = profilePic;
-    console.log(profilePic);
     db_passwords[username] = password;
     return true;
   } else {
@@ -97,6 +96,12 @@ function createNewUser({ username, displayName, profilePic, password }) {
   }
 }
 
+// function addMessageToDatabase(content, time, isReciever, friendUsername){
+//   message_list[friendUsername]= [...message_list[friendUsername],{ content: content, time: time, isReciever: isReciever }]
+//   console.log("In new msg")
+//   console.log(message_list)
+// }
+
 export {
   checkLogin,
   createNewUser,
@@ -104,5 +109,6 @@ export {
   isUsernameExists,
   getDisplayName,
   getLastMessage,
-  getProfileImage
+  getProfileImage,
+  // addMessageToDatabase,
 };

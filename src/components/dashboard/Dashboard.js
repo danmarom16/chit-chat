@@ -3,12 +3,12 @@ import Sidebar from '../sidebar/Sidebar'
 import Chat from '../chat/Chat'
 
 function Dashboard({username}) {
-  console.log("in Dashboard")
-  console.log(username)
+  const [activeChat, setActiveChat] = useState("chamzat");
+
   return (
     <>
-        <Sidebar username={username}/>
-        <Chat/>
+        <Sidebar username={username} handleSidebarClick={setActiveChat}/>
+        <Chat friendUsername={activeChat}/>
     </>
   );
 }
