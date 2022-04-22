@@ -1,21 +1,27 @@
 import React, { useRef } from "react";
 import { Modal, Form } from "react-bootstrap";
-import { isUsernameExists, getDisplayName } from "../DataBase";
-// import { useContacts } from '../contexts/ContactsProvider' - will be useful
+import { isUsernameExists, getDisplayName, addNewChat } from "../DataBase";
 
-export default function NewContactModal({ closeModal }) {
+export default function NewContactModal({myUsername, myChats, closeModal }) {
   const usernameRef = useRef();
-  // const { createContact } = useContacts()
 
-  // createContact(usernameRef.current.value)
   function handleSubmit(e) {
     e.preventDefault();
-    if (isUsernameExists(usernameRef.current.value)) {
-      console.log(getDisplayName(usernameRef.current.value));
-      closeModal();
-    } else {
+    if (!isUsernameExists(usernameRef.current.value)) {
       alert("Username not found 404!");
+    } else if(usernameRef.current.value === myUsername) {
+      alert("Can't create chat with yourself");
+    } else if(myChats.includes(usernameRef.current.value)){
+      alert("Chat already exists");
     }
+    else{
+      addChat();
+    }
+  }
+
+  function addChat(){
+    addNewChat(myUsername, usernameRef.current.value);
+    closeModal();
   }
 
   return (

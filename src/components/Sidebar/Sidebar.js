@@ -1,5 +1,5 @@
 import "./Sidebar.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SidebarChat from "./SidebarChat";
 import Avatar from "./Avatar";
 import { Modal } from "react-bootstrap";
@@ -7,9 +7,14 @@ import NewContactModal from "./newContactModal";
 import { getChats, getDisplayName, getLastMessage, getProfileImage } from "../DataBase";
 
 function Sidebar({ username, handleSidebarClick }) {
-  const [chats, setChats] = useState(getChats);
 
-  const contactList = Object.keys(chats).map((friendUsername, key) => {
+  // newChat
+  const [modalOpen, setModalOpen] = useState(false);
+  function closeModal() {
+    setModalOpen(false);
+  }
+
+  const contactList = Object.keys(getChats()).map((friendUsername, key) => {
     return (
       <SidebarChat
         displayName={getDisplayName(friendUsername)}
@@ -22,11 +27,6 @@ function Sidebar({ username, handleSidebarClick }) {
     );
   });
 
-  // newChat
-  const [modalOpen, setModalOpen] = useState(false);
-  function closeModal() {
-    setModalOpen(false);
-  }
 
   return (
     <div className="sidebar">
@@ -40,7 +40,7 @@ function Sidebar({ username, handleSidebarClick }) {
         <div xl={3} md={3} sm={3} xs={3} className="sidebar-header-right">
           <button
             id="addContact"
-            className="btn btn-light btn-sm"
+            className="btn btn-sm"
             onClick={() => setModalOpen(true)}
           >
             <i className="bi bi-person-plus-fill"></i>
@@ -58,7 +58,7 @@ function Sidebar({ username, handleSidebarClick }) {
       {contactList}
       </div>
       <Modal show={modalOpen} onHide={closeModal}>
-        <NewContactModal closeModal={closeModal} />
+        <NewContactModal myUsername={username} myChats={Object.keys(getChats())} closeModal={closeModal} />
       </Modal>
     </div>
   );

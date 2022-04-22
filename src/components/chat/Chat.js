@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Chat.css";
 import Avatar from "../sidebar/Avatar";
 import Message from "./Message";
@@ -10,15 +10,17 @@ function Chat({friendUsername}) {
 
   const [msg, setMsg] = useState("");
   const [messages, setMessages] = useState([]);
+  const dummy = useRef();
 
   useEffect(() => {
     setMessages(getChats()[friendUsername]);
-  }, [friendUsername]);
+    dummy.current.scrollIntoView({ behavior: 'smooth'});
+  }, [friendUsername, (getChats()[friendUsername])]);
 
   function sendImage (imgSrc){
     var today = new Date();
     var currentHour = today.getHours() + ":" + today.getMinutes();
-    setMessages([...messages, { content: imgSrc, time: currentHour, type: "image" }]);
+    setMessages([...messages, { content: imgSrc, time: currentHour, isSender: true, type: "image" }]);
   };
 
 
@@ -27,9 +29,8 @@ function Chat({friendUsername}) {
     if (msg != "") {
       var today = new Date();
       var currentHour = today.getHours() + ":" + today.getMinutes();
-      var currentMsg = { content: msg, time: currentHour, isReciever: true, type: "text" };
+      var currentMsg = { content: msg, time: currentHour, isSender: true, type: "text" };
       addMessageToDatabase(friendUsername, currentMsg)
-      setMessages(getChats()[friendUsername])
       setMsg("");
     }
   };
@@ -39,15 +40,15 @@ function Chat({friendUsername}) {
       <Message
         content={message.content}
         time={message.time}
-        isReciever={message.isReciever}
+        isSender={message.isSender}
         key={key}
         type={message.type}
       />
     );
   });
+
   return (
     <div className="chat">
-    {console.log(messages)}
       <div className="chat-header">
         <Avatar imgSrc={getProfileImage(friendUsername)}></Avatar>
 
@@ -58,6 +59,7 @@ function Chat({friendUsername}) {
 
       <div className="chat-body">
         {messagesList}
+        <div ref={dummy}></div>
       </div>
 
       <div className="chat-footer">
@@ -89,7 +91,6 @@ function Chat({friendUsername}) {
             placeholder="Type a message"
           ></input>
           <button type="submit" onSubmit={sendMessage}>
-            {" "}
             <i className="bi bi-send"></i>
           </button>
         </form>

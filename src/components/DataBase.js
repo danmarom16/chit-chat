@@ -1,9 +1,9 @@
 const img_asi =
   "https://frspros.com/images/easyblog_shared/July_2018/7-4-18/totw_network_profile_400.jpg";
 const img_dani =
-  "https://support.hubstaff.com/wp-content/uploads/2019/08/good-pic.png";
+  "https://pbs.twimg.com/profile_images/1243828366064697344/4QMkW3Sa_400x400.jpg";
 const img_adesanya =
-  "https://cdn.dribbble.com/users/1577045/screenshots/4914645/media/028d394ffb00cb7a4b2ef9915a384fd9.png?compress=1&resize=400x300&vertical=top";
+  "https://a.espncdn.com/combiner/i?img=/i/headshots/mma/players/full/4285679.png";
 const img_connor = "https://pbs.twimg.com/media/FJUSsomXMAAONRl.jpg";
 const img_chimaiev =
   "https://cdn.vox-cdn.com/thumbor/FHaH0uwPoIdzuD9bz-t6BKqEZHQ=/0x0:5333x3556/1200x800/filters:focal(3547x1133:4399x1985)/cdn.vox-cdn.com/uploads/chorus_image/image/70771394/1390575799.0.jpg";
@@ -32,22 +32,21 @@ db_passwords["chamzat"] = "12345678!a";
 const message_list = {};
 
 message_list["connor"] = [
-  { content: "suprise suprise mf", time: "3:50", isReciever: false, type: "text" },
-  { content: "THE KING IS BACK", time: "3:50", isReciever: false, type: "text" },
+  { content: "suprise suprise mf", time: "3:50", isSender: false, type: "text" },
+  { content: "THE KING IS BACK", time: "3:50", isSender: false, type: "text" },
 ];
 
 message_list["adesanya"] = [
-  { content: "suprise suprise mf", time: "12:21", isReciever: false, type: "text" },
-  { content: "THE KING IS BACK", time: "12:31", isReciever: false, type: "text" },
+  { content: "suprise suprise mf", time: "12:21", isSender: false, type: "text" },
+  { content: "THE KING IS BACK", time: "12:31", isSender: false, type: "text" },
 ];
 
 message_list["chamzat"] = [
-  { content: "suprise suprise mf", time: "23:50", isReciever: false, type: "text" },
-  { content: "THE KING IS BACK", time: "23:50", isReciever: false, type: "text" },
+  { content: "suprise suprise mf", time: "23:50", isSender: false, type: "text" },
+  { content: "THE KING IS BACK", time: "23:50", isSender: false, type: "text" },
 ];
 
 function isUsernameExists(username) {
-  console.log(username);
   if (db_passwords[username] === undefined) {
     return false;
   }
@@ -55,7 +54,6 @@ function isUsernameExists(username) {
 }
 
 function checkLogin(values) {
-  console.log(values);
   if (!isUsernameExists(values.username)) {
     alert("Username does not exists");
     return false;
@@ -98,8 +96,17 @@ function addMessageToDatabase(friendUsername, newMsg) {
   message_list[friendUsername] = [...message_list[friendUsername],
                                   { content: newMsg.content, 
                                   time: newMsg.time, 
-                                  isReciever: newMsg.isReciever, 
+                                  isSender: newMsg.isSender, 
                                   type: newMsg.type }]
+}
+
+//meanwhile username will not be used.
+function addNewChat(myUsername, friendUsername){
+  var today = new Date();
+  var currentHour = today.getHours() + ":" + today.getMinutes();
+  message_list[friendUsername] = [
+    {content: `Hello I'm ${getDisplayName(myUsername)} !`, time: currentHour, isSender: true, type: "text" }];
+
 }
 
 export {
@@ -111,4 +118,5 @@ export {
   getLastMessage,
   getProfileImage,
   addMessageToDatabase,
+  addNewChat,
 };

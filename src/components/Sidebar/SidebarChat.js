@@ -14,8 +14,8 @@ function SidebarChat({myUsername, displayName, lastMessage, profilePicture, hand
       <div className='sidebar-chat-info'>
             <h2>{displayName}</h2>
             <h3 className='d-flex'> 
-            <div>{lastMessage.content}</div>
-            <div className='justify-content-end'>{lastMessage.time}</div>
+            <div >{lastMessage.content}</div>
+            <div > {lastMessage.time}</div>
              </h3>
             
       </div>

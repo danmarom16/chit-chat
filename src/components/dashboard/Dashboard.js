@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import Sidebar from '../sidebar/Sidebar'
 import Chat from '../chat/Chat'
+import EmptyChat from '../chat/EmptyChat';
 
 function Dashboard({username}) {
-  const [activeChat, setActiveChat] = useState("chamzat");
+  const [activeChat, setActiveChat] = useState("");
 
   return (
     <>
         <Sidebar username={username} handleSidebarClick={setActiveChat}/>
-        <Chat friendUsername={activeChat}/>
+        {(activeChat !== "") ? <Chat friendUsername={activeChat}/> : <EmptyChat/> }
     </>
   );
 }

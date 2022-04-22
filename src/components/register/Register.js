@@ -79,7 +79,6 @@ const Register = () => {
       })
     ){
       navigate("/");
-      console.log("added");
     }
   };
 

@@ -3,10 +3,10 @@ import './Chat.css'
 
 
 
-function Message({content, time, isReciever, type}) {
+function Message({content, time, isSender, type}) {
 
     if(type == "image"){
-        return (<p className={`chat-message ${isReciever ? 'chat-reciver': ""}`}>
+        return (<p className={`chat-message ${isSender ? 'chat-sender': ""}`}>
             <img src={content} className="image-message"/>
             <span className="chat-timestamp">
                 {time}
@@ -17,7 +17,7 @@ function Message({content, time, isReciever, type}) {
 
     else
     return (
-        <p className={`chat-message ${isReciever ? 'chat-reciver': ""}`}>
+        <p className={`chat-message ${isSender ? 'chat-sender': ""}`}>
             {content}
             <span className="chat-timestamp">
                 {time}

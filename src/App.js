@@ -5,9 +5,10 @@ import { Routes, Route } from "react-router-dom"
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import BrandingBar from './components/branding bar/BrandingBar'
+import EmptyDashboard from './components/dashboard/EmptyDashboard';
 
 function App() {
-  const [username, setUsername] = useState("asi")
+  const [username, setUsername] = useState("")
 
   return (
     <div className="app">
@@ -16,7 +17,7 @@ function App() {
           <Routes>
           <Route path="/" element={<Login setUsername={setUsername} />}> </Route>
           <Route path="/register" element={<Register />}> </Route>
-          <Route path="dashboard" element={<Dashboard username={username} />}></Route>
+          <Route path="dashboard" element={(username !== "") ? <Dashboard username={username}/> : <EmptyDashboard />}></Route>
         </Routes>
       </div>
     </div>
