@@ -86,9 +86,6 @@ const Register = () => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const uploadPic = (e) => {
-    setValues({...values}, [e.target.name]: e.target.value});
-  }
 
   return (
     <div className="register">
