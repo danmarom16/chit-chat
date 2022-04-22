@@ -17,6 +17,7 @@ const Register = () => {
     confirmPassword: "",
     imgUrl: defImg
   });
+
   const navigate = useNavigate();
   const inputs = [
     {
@@ -73,7 +74,7 @@ const Register = () => {
       createNewUser({
         username: values.username,
         displayName: values.displayName,
-        profilePic: URL.createObjectURL(values.imgUrl[0]),
+        profilePic: values.imgUrl,
         password: values.password,
       })
     ){
@@ -85,7 +86,6 @@ const Register = () => {
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
-
 
   return (
     <div className="register">
