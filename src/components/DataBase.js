@@ -18,11 +18,11 @@ db_display_names["connor"] = "The Notorious";
 db_display_names["chamzat"] = "Chimaiev";
 
 const db_profile_pictures = {};
-db_profile_pictures["asi"] = {img_asi};
-db_profile_pictures["dani"] = {img_dani};
-db_profile_pictures["adesanya"] = {img_adesanya};
-db_profile_pictures["connor"] = {img_connor};
-db_profile_pictures["chimaiev"] = {img_chimaiev};
+db_profile_pictures["asi"] = img_asi;
+db_profile_pictures["dani"] = img_dani;
+db_profile_pictures["adesanya"] = img_adesanya;
+db_profile_pictures["connor"] = img_connor;
+db_profile_pictures["chimaiev"] = img_chimaiev;
 
 const db_passwords = {};
 db_passwords["asi"] = "12345678!a";
@@ -103,4 +103,5 @@ export {
   isUsernameExists,
   getDisplayName,
   getLastMessage,
+  getProfileImage
 };
