@@ -77,7 +77,11 @@ function getChats() {
 }
 
 function getLastMessage(username) {
-  return message_list[username].at(-1);
+  let lastMsg = {...message_list[username].at(-1)};
+  if (lastMsg.type === "image"){
+    lastMsg.content = "picture"
+  }  
+  return lastMsg;
 }
 
 function createNewUser({ username, displayName, profilePic, password }) {

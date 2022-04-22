@@ -8,13 +8,12 @@ import { getChats, getDisplayName, getLastMessage, getProfileImage } from "../Da
 
 function Sidebar({ username, handleSidebarClick }) {
 
-  // newChat
-  const [modalOpen, setModalOpen] = useState(false);
-  function closeModal() {
-    setModalOpen(false);
-  }
+  console.log("render")
 
-  const contactList = Object.keys(getChats()).map((friendUsername, key) => {
+  // usernames of exists chats.
+  const [openChats, setOpenChats] = useState(Object.keys(getChats()))
+
+  const contactList = openChats.map((friendUsername, key) => {
     return (
       <SidebarChat
         displayName={getDisplayName(friendUsername)}
@@ -38,13 +37,7 @@ function Sidebar({ username, handleSidebarClick }) {
           {getDisplayName(username)}
         </div>
         <div xl={3} md={3} sm={3} xs={3} className="sidebar-header-right">
-          <button
-            id="addContact"
-            className="btn btn-sm"
-            onClick={() => setModalOpen(true)}
-          >
-            <i className="bi bi-person-plus-fill"></i>
-          </button>
+        <NewContactModal myUsername={username} myChats={openChats} handleAddChat={setOpenChats} />
         </div>
       </div>
       <div className="sidebar-search">
@@ -57,9 +50,6 @@ function Sidebar({ username, handleSidebarClick }) {
       <div className="sidebar-chats">
       {contactList}
       </div>
-      <Modal show={modalOpen} onHide={closeModal}>
-        <NewContactModal myUsername={username} myChats={Object.keys(getChats())} closeModal={closeModal} />
-      </Modal>
     </div>
   );
 }

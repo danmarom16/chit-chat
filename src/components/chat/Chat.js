@@ -6,36 +6,38 @@ import UploadImageModal from "./upload image modal/UploadImageModal"
 import { Dropdown } from "react-bootstrap";
 import {getChats, getDisplayName, getProfileImage, addMessageToDatabase} from '../DataBase'
 
-function Chat({friendUsername}) {
+// The forceUpdate method updates the dashboard (last msg in sidebar chat)
+function Chat({forceUpdate, friendUsername}) {
 
-  const [msg, setMsg] = useState("");
-  const [messages, setMessages] = useState([]);
+  const textMsgRef = useRef();
   const dummy = useRef();
 
-  useEffect(() => {
-    setMessages(getChats()[friendUsername]);
-    dummy.current.scrollIntoView({ behavior: 'smooth'});
-  }, [friendUsername, (getChats()[friendUsername])]);
+  useEffect(() => { dummy.current.scrollIntoView({ behavior: 'smooth'}); });
+  
+  function getCurrentTime(){
+    var today = new Date();
+    var currentTime = today.getHours() + ":" + today.getMinutes();
+    return currentTime;
+  }
 
   function sendImage (imgSrc){
-    var today = new Date();
-    var currentHour = today.getHours() + ":" + today.getMinutes();
-    setMessages([...messages, { content: imgSrc, time: currentHour, isSender: true, type: "image" }]);
+    var currentMsg = { content: imgSrc, time: getCurrentTime(), isSender: true, type: "image" };
+    addMessageToDatabase(friendUsername, currentMsg)
+    forceUpdate()
   };
 
-
-  const sendMessage = (e) => {
+  const sendTextMessage = (e) => {
     e.preventDefault();
-    if (msg != "") {
-      var today = new Date();
-      var currentHour = today.getHours() + ":" + today.getMinutes();
-      var currentMsg = { content: msg, time: currentHour, isSender: true, type: "text" };
+    if (textMsgRef.current.value != "") {
+      var currentMsg =
+      { content: textMsgRef.current.value, time: getCurrentTime(), isSender: true, type: "text" };
       addMessageToDatabase(friendUsername, currentMsg)
-      setMsg("");
+      textMsgRef.current.value="";
+      forceUpdate()
     }
   };
 
-  const messagesList = messages.map((message, key) => {
+  const messagesList = (getChats()[friendUsername]).map((message, key) => {
     return (
       <Message
         content={message.content}
@@ -83,14 +85,13 @@ function Chat({friendUsername}) {
           </Dropdown.Menu>
         </Dropdown>
 
-        <form onSubmit={sendMessage}>
+        <form onSubmit={sendTextMessage}>
           <input
-            value={msg}
-            onChange={(e) => setMsg(e.target.value)}
+            ref={textMsgRef}
             type="text"
             placeholder="Type a message"
           ></input>
-          <button type="submit" onSubmit={sendMessage}>
+          <button type="submit" onSubmit={sendTextMessage}>
             <i className="bi bi-send"></i>
           </button>
         </form>
