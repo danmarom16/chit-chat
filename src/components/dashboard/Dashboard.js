@@ -3,10 +3,11 @@ import Sidebar from '../sidebar/Sidebar'
 import Chat from '../chat/Chat'
 
 function Dashboard({username}) {
-
+  console.log("in Dashboard")
+  console.log(username)
   return (
     <>
-        <Sidebar name={username}/>
+        <Sidebar username={username}/>
         <Chat/>
     </>
   );

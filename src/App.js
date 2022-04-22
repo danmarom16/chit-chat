@@ -7,7 +7,7 @@ import Register from "./components/register/Register";
 import BrandingBar from './components/branding bar/BrandingBar'
 
 function App() {
-  const [username, setUsername] = useState("Masvidal")
+  const [username, setUsername] = useState("asi")
 
   return (
     <div className="app">

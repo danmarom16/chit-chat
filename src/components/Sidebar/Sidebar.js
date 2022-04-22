@@ -4,7 +4,7 @@ import SidebarChat from "./SidebarChat";
 import Avatar from "./Avatar";
 import { Modal } from "react-bootstrap";
 import NewContactModal from "./newContactModal";
-import { getChats, getDisplayName, getLastMessage } from "../DataBase";
+import { getChats, getDisplayName, getLastMessage, message_list } from "../DataBase";
 
 function Sidebar({ username }) {
   const [chats, setChats] = useState(getChats);

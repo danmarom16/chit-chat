@@ -76,8 +76,8 @@ function getProfileImage(username) {
   return db_profile_pictures[username];
 }
 
-function getChats(username) {
-  return message_list[username];
+function getChats(){
+    return message_list;
 }
 
 function getLastMessage(username) {
@@ -96,6 +96,7 @@ function createNewUser({ username, displayName, profilePic, password }) {
   }
 }
 
+<<<<<<< HEAD
 export {
   checkLogin,
   createNewUser,
@@ -105,3 +106,9 @@ export {
   getLastMessage,
   message_list
 };
+=======
+export {checkLogin,
+   createNewUser,
+   getChats, isUsernameExists, getDisplayName,
+  getLastMessage, message_list };
+>>>>>>> be7a6db2a8d49b98f676e213eea24c82cdcb6f39
