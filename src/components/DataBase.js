@@ -31,31 +31,33 @@ db_passwords["adesanya"] = { password: "12345678!a" };
 db_passwords["connor"] = { password: "12345678!a" };
 db_passwords["chimaiev"] = { password: "12345678!a" };
 
+const message_list = {};
 
-const message_list = {}
+message_list["connor"] = [
+  { content: "suprise suprise mf", time: "3:50", isReciever: false },
+  { content: "THE KING IS BACK", time: "3:50", isReciever: false },
+];
 
-  message_list["connor"] = [{ content: "suprise suprise mf", time: "3:50", isReciever: false },
-  { content: "THE KING IS BACK", time: "3:50", isReciever: false }]
+message_list["adesanya"] = [
+  { content: "suprise suprise mf", time: "3:50", isReciever: false },
+  { content: "THE KING IS BACK", time: "3:50", isReciever: false },
+];
 
-  message_list["adesanya"] = [{ content: "suprise suprise mf", time: "3:50", isReciever: false },
-  { content: "THE KING IS BACK", time: "3:50", isReciever: false }]
-
-  message_list["chimaiev"] = [{ content: "suprise suprise mf", time: "3:50", isReciever: false },
-  { content: "THE KING IS BACK", time: "3:50", isReciever: false }]
-
-
+message_list["chimaiev"] = [
+  { content: "suprise suprise mf", time: "3:50", isReciever: false },
+  { content: "THE KING IS BACK", time: "3:50", isReciever: false },
+];
 
 function isUsernameExists(username) {
-  console.log(username)
+  console.log(username);
   if (db_passwords[username] === undefined) {
     return false;
   }
   return true;
 }
 
-
 function checkLogin(values) {
-  console.log(values)
+  console.log(values);
   if (!isUsernameExists(values.username)) {
     alert("Username does not exists");
     return false;
@@ -66,36 +68,40 @@ function checkLogin(values) {
   return true;
 }
 
-function getDisplayName(username){
-    return db_display_names[username];
+function getDisplayName(username) {
+  return db_display_names[username];
 }
 
-function getProfileImage(username){
-    return db_profile_pictures[username];
+function getProfileImage(username) {
+  return db_profile_pictures[username];
 }
 
-function getChats(username){
-    return message_list[username];
+function getChats(username) {
+  return message_list[username];
 }
 
-function getLastMessage(username){
+function getLastMessage(username) {
   return message_list[username][-1];
 }
 
-function createNewUser({username, displayName, profilePic, password}){
-    if(! isUsernameExists(username)){
-        db_display_names[username] = displayName;
-        db_profile_pictures[username] = profilePic;
-        db_passwords[username] = password;
-        return true;
-    }
-    else {
-        alert("User already exists");
-        return false;
-    }
+function createNewUser({ username, displayName, profilePic, password }) {
+  if (!isUsernameExists(username)) {
+    db_display_names[username] = displayName;
+    db_profile_pictures[username] = profilePic;
+    db_passwords[username] = password;
+    return true;
+  } else {
+    alert("User already exists");
+    return false;
+  }
 }
 
-export {checkLogin,
-   createNewUser,
-   getChats, isUsernameExists, getDisplayName,
-  getLastMessage };
+export {
+  checkLogin,
+  createNewUser,
+  getChats,
+  isUsernameExists,
+  getDisplayName,
+  getLastMessage,
+  message_list
+};

@@ -9,19 +9,16 @@ import { getChats, getDisplayName, getLastMessage } from "../DataBase";
 function Sidebar({ username }) {
   const [chats, setChats] = useState(getChats);
 
-const contactList = Object.keys(chats)
 
-
-  // const contactList = Object.keys(chats).map((friendUsername, key) => {
-  //   console.log(friendUsername)
-  //   return (
-  //     <SidebarChat
-  //       displayName={getDisplayName[friendUsername]}
-  //       lastMessage={getLastMessage[friendUsername]}
-  //       key={key}
-  //     />
-  //   );
-  // });
+  const contactList = Object.keys(chats).map((friendUsername, key) => {
+    return (
+      <SidebarChat
+        displayName={getDisplayName[friendUsername]}
+        lastMessage={getLastMessage[friendUsername]}
+        key={key}
+      />
+    );
+  });
 
   // newChat
   const [modalOpen, setModalOpen] = useState(false);
@@ -36,7 +33,6 @@ const contactList = Object.keys(chats)
           <Avatar imgSrc="https://placeimg.com/50/50/people"></Avatar>
         </div>
         <div xl={3} md={3} sm={3} xs={3}>
-        {console.log(contactList)}
           {getDisplayName(username)}
         </div>
         <div xl={3} md={3} sm={3} xs={3} className="sidebar-header-right">
@@ -56,7 +52,9 @@ const contactList = Object.keys(chats)
           className="m-3 rounded-pill"
         ></input>
       </div>
-      <div className="sidebar-chats">{contactList}</div>
+      <div className="sidebar-chats">
+      {contactList}
+      </div>
       <Modal show={modalOpen} onHide={closeModal}>
         <NewContactModal closeModal={closeModal} />
       </Modal>
