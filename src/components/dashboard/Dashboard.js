@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import Sidebar from '../sidebar/Sidebar'
 import Chat from '../chat/Chat'
 
-function Dashboard({name}) {
+function Dashboard({username}) {
 
   return (
     <>
-        <Sidebar name={name}/>
+        <Sidebar name={username}/>
         <Chat/>
     </>
   );

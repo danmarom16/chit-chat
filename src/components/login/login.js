@@ -4,12 +4,12 @@ import "./Login.css";
 import FormInput from '../formInput/FormInput'
 import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom"
-import { searchInDb } from "../DataBase";
+import { checkLogin } from "../DataBase";
 import { useNavigate } from "react-router-dom";
 
 
 // onLoginSubmit is a setter for the user's data
-const Login = ( {setUserData} ) => {
+const Login = ( {setUsername} ) => {
   const [values, setValues] = useState({
     username: "",
     password: "",
@@ -43,9 +43,9 @@ const Login = ( {setUserData} ) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(searchInDb(values)){
+    if(checkLogin(values)){
       console.log('user is registered');
-      setUserData(values.username)
+      setUsername(values.username)
       navigate("/dashboard");
     }
     else

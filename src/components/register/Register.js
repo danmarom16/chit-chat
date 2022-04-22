@@ -4,7 +4,7 @@ import "./Register.css";
 import FormInput from '../formInput/FormInput'
 import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom"
-import {db} from "../DataBase.js"
+import {createNewUser} from "../DataBase.js"
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
@@ -71,16 +71,17 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (db[values.username] === undefined) {
-      db[values.username] = 
-        {displayName: values.displayName, imgUrl: values.imgUrl, password: values.password};
-        console.log("added");
-        navigate("/");
+    if (
+      createNewUser({
+        username: values.username,
+        displayName: values.displayName,
+        profilePic: values.imgUrl,
+        password: values.password,
+      })
+    ){
+      navigate("/");
+      console.log("added");
     }
-    else{
-      console.log("already exists");
-    }
-    console.log(db)
   };
 
   const onChange = (e) => {
