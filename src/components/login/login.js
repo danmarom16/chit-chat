@@ -45,6 +45,8 @@ const Login = ( {setUsername} ) => {
     e.preventDefault();
     if(checkLogin(values)){
       console.log('user is registered');
+      console.log("in login")
+      console.log(values.username)
       setUsername(values.username)
       navigate("/dashboard");
     }

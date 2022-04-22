@@ -7,7 +7,7 @@ import Register from "./components/register/Register";
 import BrandingBar from './components/branding bar/BrandingBar'
 
 function App() {
-  const [username, setUsername] = useState("Masvidal")
+  const [username, setUsername] = useState("asi")
 
   return (
     <div className="app">
@@ -16,7 +16,7 @@ function App() {
           <Routes>
           <Route path="/" element={<Login setUsername={setUsername} />}> </Route>
           <Route path="/register" element={<Register />}> </Route>
-          <Route path="dashboard" element={<Dashboard name={username} />}></Route>
+          <Route path="dashboard" element={<Dashboard username={username} />}></Route>
         </Routes>
       </div>
     </div>
