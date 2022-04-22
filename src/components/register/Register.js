@@ -39,14 +39,6 @@ const Register = () => {
       required: true,
     },
     {
-      id: 3,
-      name: "photo",
-      type: "file",
-      accept: "image/*",
-      placeholder: "Photo",
-      label: "Photo",
-    },
-    {
       id: 4,
       name: "password",
       type: "password",
@@ -69,13 +61,22 @@ const Register = () => {
     },
   ];
 
+  const picture = {
+    id: 3,
+    name: "photo",
+    type: "file",
+    accept: "image/*",
+    placeholder: "Photo",
+    label: "Photo",
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
       createNewUser({
         username: values.username,
         displayName: values.displayName,
-        profilePic: values.imgUrl,
+        profilePic: URL.createObjectURL(values.imgUrl[0]),
         password: values.password,
       })
     ){
@@ -88,6 +89,10 @@ const Register = () => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
+  const uploadPic = (e) => {
+    setValues({...values}, [e.target.name]: e.target.value});
+  }
+
   return (
     <div className="register">
       <form className="animated register-form" onSubmit={handleSubmit}>
@@ -98,6 +103,10 @@ const Register = () => {
             onChange={onChange}
           />
         ))}
+        <FormInput key={picture.id} {...picture}
+          value={values[picture.name]}
+          onChange={uploadPic}
+        />
         <button className='register-button'>Submit</button>
         <Row className="register-line mb-2">
           <Col>

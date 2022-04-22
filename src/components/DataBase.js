@@ -88,6 +88,7 @@ function createNewUser({ username, displayName, profilePic, password }) {
   if (!isUsernameExists(username)) {
     db_display_names[username] = displayName;
     db_profile_pictures[username] = profilePic;
+    console.log(profilePic);
     db_passwords[username] = password;
     return true;
   } else {

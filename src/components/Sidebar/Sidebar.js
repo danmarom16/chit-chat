@@ -4,7 +4,7 @@ import SidebarChat from "./SidebarChat";
 import Avatar from "./Avatar";
 import { Modal } from "react-bootstrap";
 import NewContactModal from "./newContactModal";
-import { getChats, getDisplayName, getLastMessage, message_list } from "../DataBase";
+import { getChats, getDisplayName, getLastMessage, getProfileImage } from "../DataBase";
 
 function Sidebar({ username }) {
   const [chats, setChats] = useState(getChats);
@@ -30,7 +30,7 @@ function Sidebar({ username }) {
     <div className="sidebar">
       <div className="sidebar-header">
         <div xl={6} md={6} sm={6}>
-          <Avatar imgSrc="https://placeimg.com/50/50/people"></Avatar>
+          <Avatar imgSrc={getProfileImage(username)}></Avatar>
         </div>
         <div xl={3} md={3} sm={3} xs={3}>
           {getDisplayName(username)}
