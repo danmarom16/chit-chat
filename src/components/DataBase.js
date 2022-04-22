@@ -11,25 +11,25 @@ const img_chimaiev =
   "https://cdn.vox-cdn.com/thumbor/FHaH0uwPoIdzuD9bz-t6BKqEZHQ=/0x0:5333x3556/1200x800/filters:focal(3547x1133:4399x1985)/cdn.vox-cdn.com/uploads/chorus_image/image/70771394/1390575799.0.jpg";
 
 const db_display_names = {};
-db_display_names["asi"] = { displayName: "Asafm" };
-db_display_names["dani"] = { displayName: "DanM" };
-db_display_names["adesanya"] = { displayName: "IZZY" };
-db_display_names["connor"] = { displayName: "The Notorious" };
-db_display_names["chamzat"] = { displayName: "Chimaiev" };
+db_display_names["asi"] = "Asafm";
+db_display_names["dani"] = "DanM";
+db_display_names["adesanya"] ="IZZY";
+db_display_names["connor"] = "The Notorious";
+db_display_names["chamzat"] = "Chimaiev";
 
 const db_profile_pictures = {};
-db_profile_pictures["asi"] = { imgUrl: { img_asi } };
-db_profile_pictures["dani"] = { imgUrl: { img_dani } };
-db_profile_pictures["adesanya"] = { imgUrl: { img_adesanya } };
-db_profile_pictures["connor"] = { imgUrl: { img_connor } };
-db_profile_pictures["chimaiev"] = { imgUrl: { img_chimaiev } };
+db_profile_pictures["asi"] = {img_asi};
+db_profile_pictures["dani"] = {img_dani};
+db_profile_pictures["adesanya"] = {img_adesanya};
+db_profile_pictures["connor"] = {img_connor};
+db_profile_pictures["chimaiev"] = {img_chimaiev};
 
 const db_passwords = {};
-db_passwords["asi"] = { password: "12345678!a" };
-db_passwords["dani"] = { password: "12345678!a" };
-db_passwords["adesanya"] = { password: "12345678!a" };
-db_passwords["connor"] = { password: "12345678!a" };
-db_passwords["chimaiev"] = { password: "12345678!a" };
+db_passwords["asi"] = "12345678!a";
+db_passwords["dani"] = "12345678!a";
+db_passwords["adesanya"] = "12345678!a";
+db_passwords["connor"] = "12345678!a";
+db_passwords["chimaiev"] = "12345678!a";
 
 const message_list = {};
 
@@ -61,7 +61,7 @@ function checkLogin(values) {
   if (!isUsernameExists(values.username)) {
     alert("Username does not exists");
     return false;
-  } else if (db_passwords[values.username].password != values.password) {
+  } else if (db_passwords[values.username] != values.password) {
     alert("Wrong password");
     return false;
   }
@@ -76,8 +76,8 @@ function getProfileImage(username) {
   return db_profile_pictures[username];
 }
 
-function getChats(){
-    return message_list;
+function getChats() {
+  return message_list;
 }
 
 function getLastMessage(username) {
@@ -96,7 +96,6 @@ function createNewUser({ username, displayName, profilePic, password }) {
   }
 }
 
-<<<<<<< HEAD
 export {
   checkLogin,
   createNewUser,
@@ -104,11 +103,4 @@ export {
   isUsernameExists,
   getDisplayName,
   getLastMessage,
-  message_list
 };
-=======
-export {checkLogin,
-   createNewUser,
-   getChats, isUsernameExists, getDisplayName,
-  getLastMessage, message_list };
->>>>>>> be7a6db2a8d49b98f676e213eea24c82cdcb6f39
