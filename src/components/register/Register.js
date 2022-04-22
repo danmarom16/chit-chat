@@ -8,12 +8,14 @@ import {createNewUser} from "../DataBase.js"
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  var defImg = "https://cdn.dribbble.com/users/1577045/screenshots/4914645/media/028d394ffb00cb7a4b2ef9915a384fd9.png?compress=1&resize=400x300&vertical=top";
+
   const [values, setValues] = useState({
     username: "",
     displayName: "",
-    imgUrl: null, // we will have to edit this.
     password: "",
     confirmPassword: "",
+    imgUrl: defImg
   });
   const navigate = useNavigate();
   const inputs = [
@@ -39,7 +41,7 @@ const Register = () => {
       required: true,
     },
     {
-      id: 4,
+      id: 3,
       name: "password",
       type: "password",
       placeholder: "Password",
@@ -50,7 +52,7 @@ const Register = () => {
       required: true,
     },
     {
-      id: 5,
+      id: 4,
       name: "confirmPassword",
       type: "password",
       placeholder: "Confirm password",
@@ -61,13 +63,8 @@ const Register = () => {
     },
   ];
 
-  const picture = {
-    id: 3,
-    name: "photo",
-    type: "file",
-    accept: "image/*",
-    placeholder: "Photo",
-    label: "Photo",
+  const handleUploadImage = (e) => {
+    setValues({ ...values, ["imgUrl"]: URL.createObjectURL(e.target.files[0]) });
   }
 
   const handleSubmit = (e) => {
@@ -103,10 +100,7 @@ const Register = () => {
             onChange={onChange}
           />
         ))}
-        <FormInput key={picture.id} {...picture}
-          value={values[picture.name]}
-          onChange={uploadPic}
-        />
+        <FormInput name="profilePic" type="file" accept="image/*" label="photo" onChange={handleUploadImage} />
         <button className='register-button'>Submit</button>
         <Row className="register-line mb-2">
           <Col>
