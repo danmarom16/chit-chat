@@ -4,12 +4,12 @@ import Avatar from "../sidebar/Avatar";
 import Message from "./Message";
 import UploadImageModal from "./upload image modal/UploadImageModal"
 import { Dropdown } from "react-bootstrap";
-import {getChats, getDisplayName, getProfileImage, /*addMessageToDatabase*/} from '../DataBase'
+import {getChats, getDisplayName, getProfileImage, addMessageToDatabase} from '../DataBase'
 
 function Chat({friendUsername}) {
 
   const [msg, setMsg] = useState("");
-  const [messages, setMessages] = useState(getChats()[friendUsername]);
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     setMessages(getChats()[friendUsername]);
@@ -27,8 +27,9 @@ function Chat({friendUsername}) {
     if (msg != "") {
       var today = new Date();
       var currentHour = today.getHours() + ":" + today.getMinutes();
-      // addMessageToDatabase({ content: msg, time: currentHour, isReciever: true })
-      setMessages([...messages, { content: msg, time: currentHour, isRecieve: true }]);
+      var currentMsg = { content: msg, time: currentHour, isReciever: true, type: "text" };
+      addMessageToDatabase(friendUsername, currentMsg)
+      setMessages(getChats()[friendUsername])
       setMsg("");
     }
   };
@@ -44,7 +45,6 @@ function Chat({friendUsername}) {
       />
     );
   });
-
   return (
     <div className="chat">
     {console.log(messages)}
@@ -95,7 +95,7 @@ function Chat({friendUsername}) {
         </form>
       </div>
     </div>
-  );
-}
+    );
+  }
 
 export default Chat;

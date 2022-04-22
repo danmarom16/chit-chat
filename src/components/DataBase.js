@@ -1,5 +1,3 @@
-import Message from "./chat/Message";
-
 const img_asi =
   "https://frspros.com/images/easyblog_shared/July_2018/7-4-18/totw_network_profile_400.jpg";
 const img_dani =
@@ -13,7 +11,7 @@ const img_chimaiev =
 const db_display_names = {};
 db_display_names["asi"] = "Asafm";
 db_display_names["dani"] = "DanM";
-db_display_names["adesanya"] ="IZZY";
+db_display_names["adesanya"] = "IZZY";
 db_display_names["connor"] = "The Notorious";
 db_display_names["chamzat"] = "Chimaiev";
 
@@ -34,18 +32,18 @@ db_passwords["chamzat"] = "12345678!a";
 const message_list = {};
 
 message_list["connor"] = [
-  { content: "suprise suprise mf", time: "3:50", isReciever: false },
-  { content: "THE KING IS BACK", time: "3:50", isReciever: false },
+  { content: "suprise suprise mf", time: "3:50", isReciever: false, type: "text" },
+  { content: "THE KING IS BACK", time: "3:50", isReciever: false, type: "text" },
 ];
 
 message_list["adesanya"] = [
-  { content: "suprise suprise mf", time: "12:21", isReciever: false },
-  { content: "THE KING IS BACK", time: "12:31", isReciever: false },
+  { content: "suprise suprise mf", time: "12:21", isReciever: false, type: "text" },
+  { content: "THE KING IS BACK", time: "12:31", isReciever: false, type: "text" },
 ];
 
 message_list["chamzat"] = [
-  { content: "suprise suprise mf", time: "23:50", isReciever: false },
-  { content: "THE KING IS BACK", time: "23:50", isReciever: false },
+  { content: "suprise suprise mf", time: "23:50", isReciever: false, type: "text" },
+  { content: "THE KING IS BACK", time: "23:50", isReciever: false, type: "text" },
 ];
 
 function isUsernameExists(username) {
@@ -96,11 +94,13 @@ function createNewUser({ username, displayName, profilePic, password }) {
   }
 }
 
-// function addMessageToDatabase(content, time, isReciever, friendUsername){
-//   message_list[friendUsername]= [...message_list[friendUsername],{ content: content, time: time, isReciever: isReciever }]
-//   console.log("In new msg")
-//   console.log(message_list)
-// }
+function addMessageToDatabase(friendUsername, newMsg) {
+  message_list[friendUsername] = [...message_list[friendUsername],
+                                  { content: newMsg.content, 
+                                  time: newMsg.time, 
+                                  isReciever: newMsg.isReciever, 
+                                  type: newMsg.type }]
+}
 
 export {
   checkLogin,
@@ -110,5 +110,5 @@ export {
   getDisplayName,
   getLastMessage,
   getProfileImage,
-  // addMessageToDatabase,
+  addMessageToDatabase,
 };
