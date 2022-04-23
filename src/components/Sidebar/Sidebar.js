@@ -2,7 +2,6 @@ import "./Sidebar.css";
 import React, { useEffect, useState } from "react";
 import SidebarChat from "./SidebarChat";
 import Avatar from "./Avatar";
-import { Modal } from "react-bootstrap";
 import NewContactModal from "./newContactModal";
 import { getChats, getDisplayName, getLastMessage, getProfileImage } from "../DataBase";
 
@@ -12,8 +11,16 @@ function Sidebar({ username, handleSidebarClick }) {
 
   // usernames of exists chats.
   const [openChats, setOpenChats] = useState(Object.keys(getChats()))
+  const [searchValue, setSearchValue] = useState("")
 
-  const contactList = openChats.map((friendUsername, key) => {
+
+  const contactList = openChats.filter((friendUsername) => {
+    let friendName = (getDisplayName(friendUsername)).toLowerCase();
+    let searchVal = searchValue.toLowerCase();
+    return(friendName.includes(searchVal));
+  })
+
+    const contactListResult = contactList.map((friendUsername, key) => {
     return (
       <SidebarChat
         displayName={getDisplayName(friendUsername)}
@@ -41,14 +48,14 @@ function Sidebar({ username, handleSidebarClick }) {
         </div>
       </div>
       <div className="sidebar-search bright-3-brand-color">
-        <input
+        <input onChange={((e) => {setSearchValue(e.target.value)})}
           type="text"
           placeholder="Search or start a new chat"
           className="m-3 rounded-pill"
         ></input>
       </div>
       <div className="sidebar-chats">
-      {contactList}
+      {contactListResult}
       </div>
     </div>
   );
