@@ -10,7 +10,7 @@ function Sidebar({ username, handleSidebarClick }) {
   console.log("render")
 
   // usernames of exists chats.
-  const [openChats, setOpenChats] = useState(Object.keys(getChats()))
+  const [openChats, setOpenChats] = useState(Object.keys(getChats(username)))
   const [searchValue, setSearchValue] = useState("")
 
 
@@ -24,7 +24,7 @@ function Sidebar({ username, handleSidebarClick }) {
     return (
       <SidebarChat
         displayName={getDisplayName(friendUsername)}
-        lastMessage={getLastMessage(friendUsername)}
+        lastMessage={getLastMessage(username, friendUsername)}
         profilePicture = {getProfileImage(friendUsername)}
         myUsername = {friendUsername}
         key={key}

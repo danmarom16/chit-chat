@@ -15,7 +15,9 @@ function Dashboard({username}) {
   return (
     <>
         <Sidebar username={username} handleSidebarClick={setActiveChat}/>
-        {(activeChat !== "") ? <Chat forceUpdate={forceUpdate} friendUsername={activeChat}/> : <EmptyChat/> }
+        {(activeChat !== "") ?
+         <Chat forceUpdate={forceUpdate} myUsername={username} friendUsername={activeChat}/> :
+          <EmptyChat/> }
     </>
   );
 }

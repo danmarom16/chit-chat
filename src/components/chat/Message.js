@@ -40,13 +40,11 @@ function Message({content, time, isSender, type}) {
     );
     } 
     return (
-        <p className={`chat-message ${isSender ? 'chat-sender': ""}`}>
-        <div className='p-2'>
-                {content}
-        </div>
-            <div className="chat-timestamp">
+        <p className={`flex p-2 text-message chat-message ${isSender ? 'chat-sender': ""}`}>
+                <div>{content}</div>
+            <span className="chat-timestamp">
                 {time}
-            </div>
+            </span>
         </p>
     )
 }

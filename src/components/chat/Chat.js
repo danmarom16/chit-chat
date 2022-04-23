@@ -9,7 +9,7 @@ import { Dropdown } from "react-bootstrap";
 import {getChats, getDisplayName, getProfileImage, addMessageToDatabase} from '../DataBase'
 
 // The forceUpdate method updates the dashboard (last msg in sidebar chat)
-function Chat({forceUpdate, friendUsername}) {
+function Chat({forceUpdate, myUsername, friendUsername}) {
 
   const textMsgRef = useRef();
   const dummy = useRef();
@@ -46,11 +46,11 @@ function Chat({forceUpdate, friendUsername}) {
 
   const sendMessage = (msgContent, msgType) => {
     var currentMsg = { content: msgContent, time: getCurrentTime(), isSender: true, type: msgType };
-    addMessageToDatabase(friendUsername, currentMsg)
+    addMessageToDatabase(myUsername, friendUsername, currentMsg)
     forceUpdate()
   }
 
-  const messagesList = (getChats()[friendUsername]).map((message, key) => {
+  const messagesList = ((getChats(myUsername))[friendUsername]).map((message, key) => {
     return (
       <Message
         content={message.content}

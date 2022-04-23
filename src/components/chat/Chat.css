@@ -29,6 +29,7 @@
 }
 
 .chat-body{
+    height: 85%;
     flex: 1;
     overflow-y: scroll;
     padding: 30px;
@@ -37,11 +38,14 @@
 }
 
 .chat-message{
+    float:inline-start;
     padding: 0px;
     background-color: #ffffff;
     border-radius: 10px;
     font-size: 16px;
     width: fit-content;
+    max-width: 70%;
+    flex-grow: 100;
 }
 
 .chat-timestamp{
@@ -49,6 +53,7 @@
     font-size: xx-small;
     display:inline-flex;
     color: #000;
+    justify-content: end;
 }
 
 .chat-sender{
@@ -103,6 +108,11 @@
 .dropdown-menu.show {
     display: flex;
   }
+
+.text-message{
+    max-width: 300px;
+    word-break: break-all
+}
 
   .image-message{
     max-width: 150px;

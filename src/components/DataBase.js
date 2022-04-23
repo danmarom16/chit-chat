@@ -4,7 +4,7 @@ const img_dani =
   "https://pbs.twimg.com/profile_images/1243828366064697344/4QMkW3Sa_400x400.jpg";
 const img_adesanya =
   "https://a.espncdn.com/combiner/i?img=/i/headshots/mma/players/full/4285679.png";
-const img_connor = "https://pbs.twimg.com/media/FJUSsomXMAAONRl.jpg";
+const img_conor = "https://pbs.twimg.com/media/FJUSsomXMAAONRl.jpg";
 const img_chimaiev =
   "https://cdn.vox-cdn.com/thumbor/FHaH0uwPoIdzuD9bz-t6BKqEZHQ=/0x0:5333x3556/1200x800/filters:focal(3547x1133:4399x1985)/cdn.vox-cdn.com/uploads/chorus_image/image/70771394/1390575799.0.jpg";
 
@@ -12,39 +12,41 @@ const db_display_names = {};
 db_display_names["asi"] = "Asafm";
 db_display_names["dani"] = "DanM";
 db_display_names["adesanya"] = "IZZY";
-db_display_names["connor"] = "The Notorious";
-db_display_names["chamzat"] = "Chimaiev";
+db_display_names["conor"] = "The Notorious";
+db_display_names["khamzat"] = "Chimaiev";
 
 const db_profile_pictures = {};
 db_profile_pictures["asi"] = img_asi;
 db_profile_pictures["dani"] = img_dani;
 db_profile_pictures["adesanya"] = img_adesanya;
-db_profile_pictures["connor"] = img_connor;
-db_profile_pictures["chamzat"] = img_chimaiev;
+db_profile_pictures["conor"] = img_conor;
+db_profile_pictures["khamzat"] = img_chimaiev;
 
-const db_passwords = {};
+const db_passwords = {}; // might be hash results
 db_passwords["asi"] = "12345678!a";
 db_passwords["dani"] = "12345678!a";
 db_passwords["adesanya"] = "12345678!a";
-db_passwords["connor"] = "12345678!a";
-db_passwords["chamzat"] = "12345678!a";
+db_passwords["conor"] = "12345678!a";
+db_passwords["khamzat"] = "12345678!a";
 
-const message_list = {};
+const db_msg_lists = {};
 
-message_list["connor"] = [
+const message_list_asi = {};
+message_list_asi["conor"] = [
   { content: "suprise suprise mf", time: "3:50", isSender: false, type: "text" },
   { content: "THE KING IS BACK", time: "3:50", isSender: false, type: "text" },
 ];
 
-message_list["adesanya"] = [
-  { content: "suprise suprise mf", time: "12:21", isSender: false, type: "text" },
-  { content: "THE KING IS BACK", time: "12:31", isSender: false, type: "text" },
+message_list_asi["adesanya"] = [
+  { content: "I'm the new dog in the yard", time: "12:21", isSender: false, type: "text" },
+  { content: "Bring me some fresh meat", time: "12:31", isSender: false, type: "text" },
 ];
 
-message_list["chamzat"] = [
-  { content: "suprise suprise mf", time: "23:50", isSender: false, type: "text" },
-  { content: "THE KING IS BACK", time: "23:50", isSender: false, type: "text" },
+message_list_asi["khamzat"] = [
+  { content: "brother doesn't matter", time: "23:50", isSender: false, type: "text" },
+  { content: "I'm gonna smash everybody", time: "23:50", isSender: false, type: "text" },
 ];
+db_msg_lists["asi"] = message_list_asi;
 
 function isUsernameExists(username) {
   if (db_passwords[username] === undefined) {
@@ -72,18 +74,21 @@ function getProfileImage(username) {
   return db_profile_pictures[username];
 }
 
-function getChats() {
-  return message_list;
+function getChats(username) {
+  return db_msg_lists[username];
 }
 
-function getLastMessage(username) {
-  let lastMsg = {...message_list[username].at(-1)};
+function getLastMessage(myUsername, friendUsername) {
+  console.log("in lmsg")
+  console.log(friendUsername)
+  console.log(db_msg_lists[myUsername])
+  let lastMsg = {...((db_msg_lists[myUsername])[friendUsername]).at(-1)};
   if (lastMsg.type === "image"){
     lastMsg.content = "picture"
   } else   if (lastMsg.type === "video"){
     lastMsg.content = "video"
   } else   if (lastMsg.type === "record"){
-    lastMsg.content = "record"
+    lastMsg.content = "recording"
   } else if (lastMsg.type === "text"){
     if ((lastMsg.content).length > 20) {
       console.log(lastMsg)
@@ -99,6 +104,7 @@ function createNewUser({ username, displayName, profilePic, password }) {
     db_display_names[username] = displayName;
     db_profile_pictures[username] = profilePic;
     db_passwords[username] = password;
+    db_msg_lists[username] = {};
     return true;
   } else {
     alert("User already exists");
@@ -106,8 +112,8 @@ function createNewUser({ username, displayName, profilePic, password }) {
   }
 }
 
-function addMessageToDatabase(friendUsername, newMsg) {
-  message_list[friendUsername] = [...message_list[friendUsername],
+function addMessageToDatabase(myUsername, friendUsername, newMsg) {
+  (db_msg_lists[myUsername])[friendUsername] = [...((db_msg_lists[myUsername])[friendUsername]),
                                   { content: newMsg.content, 
                                   time: newMsg.time, 
                                   isSender: newMsg.isSender, 
@@ -116,11 +122,17 @@ function addMessageToDatabase(friendUsername, newMsg) {
 
 //meanwhile username will not be used.
 function addNewChat(myUsername, friendUsername){
+  console.log("in new Chat")
+  console.log(friendUsername)
+  console.log(db_msg_lists[myUsername])
   var today = new Date();
   var currentHour = today.getHours() + ":" + today.getMinutes();
-  message_list[friendUsername] = [
-    {content: `Hello I'm ${getDisplayName(myUsername)} !`, time: currentHour, isSender: true, type: "text" }];
-
+  (db_msg_lists[myUsername])[friendUsername] = [
+    {content: `Hello I'm ${getDisplayName(myUsername)}! How you doin?`,
+     time: currentHour, isSender: true, type: "text" }];
+     console.log("in new Chat")
+     console.log(friendUsername)
+     console.log(db_msg_lists[myUsername])
 }
 
 export {
