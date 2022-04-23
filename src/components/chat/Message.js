@@ -22,7 +22,17 @@ function Message({content, time, isSender, type}) {
             </span>
         </p>
     );
-    }
+    }    
+    
+    else if(type == "record"){
+        return (<p className={`chat-message ${isSender ? 'chat-sender': ""}`}>
+            <audio controls src={content} className="record-message"/>
+            <span className="chat-timestamp">
+                {time}
+            </span>
+        </p>
+    );
+    } 
     return (
         <p className={`chat-message ${isSender ? 'chat-sender': ""}`}>
             {content}

@@ -4,6 +4,7 @@ import Avatar from "../sidebar/Avatar";
 import Message from "./Message";
 import UploadImageModal from "./uploadFileModals/UploadImageModal"
 import UploadVideoModal from "./uploadFileModals/UploadVideoModal"
+import UploadRecordModal from "./uploadFileModals/UploadRecordModal"
 import { Dropdown } from "react-bootstrap";
 import {getChats, getDisplayName, getProfileImage, addMessageToDatabase} from '../DataBase'
 
@@ -29,6 +30,10 @@ function Chat({forceUpdate, friendUsername}) {
 
   function sendVideo (videoSrc){
     sendMessage(videoSrc, "video");
+  };
+
+  function sendRecord (recordSrc){
+    sendMessage(recordSrc, "record");
   };
 
   const sendTextMessage = (e) => {
@@ -86,14 +91,11 @@ function Chat({forceUpdate, friendUsername}) {
               <UploadImageModal sendImage={sendImage}/>
             </Dropdown.Item>
             <Dropdown.Item href="#/action-2">
-              <i className="bi bi-mic" />
+            <UploadRecordModal sendRecord={sendRecord}/>
             </Dropdown.Item>
             <Dropdown.Item href="#/action-3">
             <UploadVideoModal sendVideo={sendVideo}/>
             </Dropdown.Item>
-            {/*<Dropdown.Item href="#/action-3">
-              <i className="bi bi-geo-alt" />
-  </Dropdown.Item>*/}
           </Dropdown.Menu>
         </Dropdown>
 

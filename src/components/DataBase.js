@@ -82,7 +82,9 @@ function getLastMessage(username) {
     lastMsg.content = "picture"
   } else   if (lastMsg.type === "video"){
     lastMsg.content = "video"
-  }  
+  } else   if (lastMsg.type === "record"){
+    lastMsg.content = "record"
+  } 
   return lastMsg;
 }
 
