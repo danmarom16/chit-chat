@@ -108,3 +108,7 @@
   .image-message{
     max-width: 150px;
 }
+
+.video-message{
+    max-width: 300px;
+}
