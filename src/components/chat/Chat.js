@@ -51,7 +51,7 @@ function Chat({forceUpdate, friendUsername}) {
 
   return (
     <div className="chat">
-      <div className="chat-header">
+      <div className="chat-header bright-2-brand-color">
         <Avatar imgSrc={getProfileImage(friendUsername)}></Avatar>
 
         <div className="chat-header-info">
@@ -64,7 +64,7 @@ function Chat({forceUpdate, friendUsername}) {
         <div ref={dummy}></div>
       </div>
 
-      <div className="chat-footer">
+      <div className="chat-footer bright-3-brand-color">
         <Dropdown drop="up">
           <Dropdown.Toggle variant="light-gray" id="dropdown-basic">
             <i className="bi bi-paperclip"></i>
@@ -92,7 +92,7 @@ function Chat({forceUpdate, friendUsername}) {
             placeholder="Type a message"
           ></input>
           <button type="submit" onSubmit={sendTextMessage}>
-            <i className="bi bi-send"></i>
+            <i className="bi bi-send "></i>
           </button>
         </form>
       </div>

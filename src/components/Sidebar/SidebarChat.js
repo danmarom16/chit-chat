@@ -9,13 +9,13 @@ function SidebarChat({myUsername, displayName, lastMessage, profilePicture, hand
   }
 
   return (
-      <div className='sidebar-chat' onClick={onClick}>
+      <div className='sidebar-chat bright-brand-color' onClick={onClick}>
       <Avatar imgSrc={profilePicture}/>
       <div className='sidebar-chat-info'>
-            <h2>{displayName}</h2>
+            <h2 >{displayName}</h2>
             <h3 className='d-flex'> 
-            <div >{lastMessage.content}</div>
-            <div > {lastMessage.time}</div>
+            <div className="text-muted">{lastMessage.content}</div>
+            <small className="text-muted" > {lastMessage.time}</small>
              </h3>
             
       </div>
