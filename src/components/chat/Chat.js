@@ -20,7 +20,7 @@ function Chat({forceUpdate, friendUsername}) {
     var today = new Date();
     var currentHour = today.getHours();
     var currentMin = today.getMinutes();
-    currentMin = (currentMin < 10) ? '0${currentMin}' : currentMin;
+    currentMin = (currentMin < 10) ? '0${currentMin}' : currentMin
     return currentHour + ":" + currentMin;
   }
 
@@ -38,17 +38,13 @@ function Chat({forceUpdate, friendUsername}) {
 
   const sendTextMessage = (e) => {
     e.preventDefault();
-    console.log(textMsgRef.current.value)
     if (textMsgRef.current.value != "") {
       sendMessage(textMsgRef.current.value, "text");
-      console.log(textMsgRef.current.value)
       textMsgRef.current.value="";
-      console.log(textMsgRef.current.value)
     }
   };
 
   const sendMessage = (msgContent, msgType) => {
-    console.log(textMsgRef.current.value)
     var currentMsg = { content: msgContent, time: getCurrentTime(), isSender: true, type: msgType };
     addMessageToDatabase(friendUsername, currentMsg)
     forceUpdate()

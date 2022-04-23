@@ -9,13 +9,9 @@ function UploadRecordModal({ sendRecord }) {
     const handleShow = () => setShow(true);
     const [record, setRecord] = useState("");
 
-    const sleep = ms => new Promise(r => setTimeout(r, ms));
-
     const handleSendRecord = ((e) => {
-        if (record != null) {
             sendRecord(record)
             handleClose();
-        }
     })
 
 
@@ -88,7 +84,6 @@ function UploadRecordModal({ sendRecord }) {
                         <i className="bi bi-mic"></i>
                     </button>
                     {(record !== "") ? <ShowRecord /> : ""}
-
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleSendRecord}>
