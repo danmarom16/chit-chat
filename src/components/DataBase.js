@@ -84,7 +84,13 @@ function getLastMessage(username) {
     lastMsg.content = "video"
   } else   if (lastMsg.type === "record"){
     lastMsg.content = "record"
-  } 
+  } else if (lastMsg.type === "text"){
+    if ((lastMsg.content).length > 20) {
+      console.log(lastMsg)
+      lastMsg.content = (lastMsg.content).slice(0,20) + "..."
+      console.log(lastMsg)
+    }
+  }
   return lastMsg;
 }
 
