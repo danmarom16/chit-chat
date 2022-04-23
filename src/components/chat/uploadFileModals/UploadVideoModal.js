@@ -2,23 +2,21 @@ import {React, useState} from 'react'
 import { Button, Modal, Form } from "react-bootstrap";
 
 
-function UploadImageModal({sendImage}) {
+function UploadVideoModal({sendVideo}) {
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [image, setImage] = useState();
+    const [video, setVideo] = useState();
 
 
-    const uploadImage = e => {
-      var imgSrc = URL.createObjectURL(e.target.files[0]);
-      setImage(imgSrc)
-
+    const uploadVideo = e => {
+      setVideo(URL.createObjectURL(e.target.files[0]));
     }
 
-    const handleSendImage = e => {
-      if(image != null){
-        sendImage(image)
+    const handleSendVideo = e => {
+      if(video != null){
+        sendVideo(video)
         setShow(false)
       }
     }
@@ -26,26 +24,26 @@ function UploadImageModal({sendImage}) {
   return (
     <>
     <button className="btn btn-sm" onClick={handleShow}>
-    <i className="bi bi-image"></i>
+    <i className="bi bi-camera-reels" />
   </button>
 
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Upload Image</Modal.Title>
+        <Modal.Title>Upload Video</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form > 
           <Form.Group className="mb-3">
             <Form.Control
               type="file"
-              onChange={uploadImage}
-              accept="image/*"
+              onChange={uploadVideo}
+              accept="video/*"
             />
           </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleSendImage}>
+        <Button variant="secondary" onClick={handleSendVideo}>
           Send
         </Button>
       </Modal.Footer>
@@ -54,4 +52,4 @@ function UploadImageModal({sendImage}) {
 );
 }
 
-export default UploadImageModal
+export default UploadVideoModal

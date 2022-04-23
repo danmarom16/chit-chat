@@ -2,7 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Chat.css";
 import Avatar from "../sidebar/Avatar";
 import Message from "./Message";
-import UploadImageModal from "./upload image modal/UploadImageModal"
+import UploadImageModal from "./uploadFileModals/UploadImageModal"
+import UploadVideoModal from "./uploadFileModals/UploadVideoModal"
+import UploadRecordModal from "./uploadFileModals/UploadRecordModal"
 import { Dropdown } from "react-bootstrap";
 import {getChats, getDisplayName, getProfileImage, addMessageToDatabase} from '../DataBase'
 
@@ -16,26 +18,41 @@ function Chat({forceUpdate, friendUsername}) {
   
   function getCurrentTime(){
     var today = new Date();
-    var currentTime = today.getHours() + ":" + today.getMinutes();
-    return currentTime;
+    var currentHour = today.getHours();
+    var currentMin = today.getMinutes();
+    currentMin = (currentMin < 10) ? '0${currentMin}' : currentMin;
+    return currentHour + ":" + currentMin;
   }
 
   function sendImage (imgSrc){
-    var currentMsg = { content: imgSrc, time: getCurrentTime(), isSender: true, type: "image" };
-    addMessageToDatabase(friendUsername, currentMsg)
-    forceUpdate()
+    sendMessage(imgSrc, "image");
+  };
+
+  function sendVideo (videoSrc){
+    sendMessage(videoSrc, "video");
+  };
+
+  function sendRecord (recordSrc){
+    sendMessage(recordSrc, "record");
   };
 
   const sendTextMessage = (e) => {
     e.preventDefault();
+    console.log(textMsgRef.current.value)
     if (textMsgRef.current.value != "") {
-      var currentMsg =
-      { content: textMsgRef.current.value, time: getCurrentTime(), isSender: true, type: "text" };
-      addMessageToDatabase(friendUsername, currentMsg)
+      sendMessage(textMsgRef.current.value, "text");
+      console.log(textMsgRef.current.value)
       textMsgRef.current.value="";
-      forceUpdate()
+      console.log(textMsgRef.current.value)
     }
   };
+
+  const sendMessage = (msgContent, msgType) => {
+    console.log(textMsgRef.current.value)
+    var currentMsg = { content: msgContent, time: getCurrentTime(), isSender: true, type: msgType };
+    addMessageToDatabase(friendUsername, currentMsg)
+    forceUpdate()
+  }
 
   const messagesList = (getChats()[friendUsername]).map((message, key) => {
     return (
@@ -74,13 +91,10 @@ function Chat({forceUpdate, friendUsername}) {
               <UploadImageModal sendImage={sendImage}/>
             </Dropdown.Item>
             <Dropdown.Item href="#/action-2">
-              <i className="bi bi-mic" />
+            <UploadRecordModal sendRecord={sendRecord}/>
             </Dropdown.Item>
             <Dropdown.Item href="#/action-3">
-              <i className="bi bi-camera-reels" />
-            </Dropdown.Item>
-            <Dropdown.Item href="#/action-3">
-              <i className="bi bi-geo-alt" />
+            <UploadVideoModal sendVideo={sendVideo}/>
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>

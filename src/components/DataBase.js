@@ -80,7 +80,11 @@ function getLastMessage(username) {
   let lastMsg = {...message_list[username].at(-1)};
   if (lastMsg.type === "image"){
     lastMsg.content = "picture"
-  }  
+  } else   if (lastMsg.type === "video"){
+    lastMsg.content = "video"
+  } else   if (lastMsg.type === "record"){
+    lastMsg.content = "record"
+  } 
   return lastMsg;
 }
 
