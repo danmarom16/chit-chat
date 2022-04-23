@@ -11,3 +11,7 @@
     cursor: pointer;
     margin-bottom: 30px;
 }
+
+.empty-dashboard{
+    width: 40vw;
+}

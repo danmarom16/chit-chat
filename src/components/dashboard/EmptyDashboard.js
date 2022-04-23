@@ -15,18 +15,19 @@ function EmptyDashboard() {
 
   return (
 
-    <div>
-      <h1 className='mt-5 text-light display-2 dark-blue-brand-color'> Please login or register </h1>
-      <div className='mt-5'>
-        <div className='text-light'>Aleardy registered?</div>
+    <div className='empty-dashboard'>
+      <h1 className='mt-5 title'> Please login or register </h1>
+      <div className='mt-5 '>
+        <div className='text-light '>
+        Aleardy registered?</div>
         <Button className='button' variant="light" onClick={moveToLoginPage}>
-          Press here to Login <i className="bi bi-door-open"></i> </Button>{' '}
+          Click here to Login <i className="bi bi-door-open"></i> </Button>{' '}
       </div>
       <div className='mt-3'>
         <div className='text-light'>Not registered?</div>
         <Button className='button' variant="light" onClick={moveToRegisterPage}>
-          Press here to Register
-          <i className="bi bi-pencil-square">
+          Click here to Register
+          <i className="bi bi-pencil-square p-2">
           </i>
         </Button>{' '}
       </div>

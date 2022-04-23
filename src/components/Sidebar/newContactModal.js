@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Modal, Form } from "react-bootstrap";
+import { Modal, Form, Button } from "react-bootstrap";
 import { isUsernameExists, addNewChat, getChats } from "../DataBase";
 
 function NewContactModal({ myUsername, myChats, handleAddChat}) {
@@ -42,10 +42,10 @@ function NewContactModal({ myUsername, myChats, handleAddChat}) {
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group>
-              <Form.Label>Contact's identifier</Form.Label>
+              <Form.Label className="text-black">Contact's identifier</Form.Label>
               <Form.Control type="text" ref={usernameRef} required />
             </Form.Group>
-            <button type="submit">Add</button>
+            <Button variant="secondary" type="submit">Add</Button>
           </Form>
         </Modal.Body>
       </Modal>

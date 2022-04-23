@@ -20,7 +20,7 @@ function Chat({forceUpdate, friendUsername}) {
     var today = new Date();
     var currentHour = today.getHours();
     var currentMin = today.getMinutes();
-    currentMin = (currentMin < 10) ? '0${currentMin}' : currentMin
+    currentMin = (currentMin < 10) ? '0'+currentMin : currentMin
     return currentHour + ":" + currentMin;
   }
 

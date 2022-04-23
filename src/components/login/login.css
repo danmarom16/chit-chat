@@ -8,10 +8,12 @@
   
   .login-form{
     background-color: #01252c;
-    padding: 0px 60px;
+    padding: 50px 45px;
     border-radius: 10px;
     animation: transitionIn 0.75s;
-    margin-top: 40px;
+    box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
+    min-height: 400px;
+    justify-content: center;
 
 }
 
@@ -32,7 +34,7 @@
       font-weight: bold;
       font-size: 18px;
       cursor: pointer;
-      margin-top: 15px;
+      margin-top: 55px;
       margin-bottom: 30px;
   }
 
