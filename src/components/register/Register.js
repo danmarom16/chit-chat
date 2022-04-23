@@ -100,7 +100,7 @@ const Register = () => {
         <button className='register-button'>Submit</button>
         <Row className="register-line mb-2">
           <Col>
-            Not registered yet?
+            Already registered?
           </Col>
           <Col>
             <Link to="/">Click Here.</Link>

@@ -29,18 +29,18 @@ function Sidebar({ username, handleSidebarClick }) {
 
   return (
     <div className="sidebar">
-      <div className="sidebar-header">
+      <div className="sidebar-header bright-2-brand-color">
         <div xl={6} md={6} sm={6}>
           <Avatar imgSrc={getProfileImage(username)}></Avatar>
         </div>
-        <div xl={3} md={3} sm={3} xs={3}>
+        <div className="user-login-name" xl={3} md={3} sm={3} xs={3}>
           {getDisplayName(username)}
         </div>
         <div xl={3} md={3} sm={3} xs={3} className="sidebar-header-right">
         <NewContactModal myUsername={username} myChats={openChats} handleAddChat={setOpenChats} />
         </div>
       </div>
-      <div className="sidebar-search">
+      <div className="sidebar-search bright-3-brand-color">
         <input
           type="text"
           placeholder="Search or start a new chat"

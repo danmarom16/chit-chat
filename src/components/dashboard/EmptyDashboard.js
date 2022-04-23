@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
+import './EmptyDashboard.css'
 
 function EmptyDashboard() {
 
@@ -15,12 +16,15 @@ function EmptyDashboard() {
   return(
 
     <div>
-    <h1 className='mt-5' style={{color:"white"}}> Please login or register :) </h1>
+    <h1 className='mt-5 text-light display-2 dark-blue-brand-color'> Please login or register </h1>
     <div className='mt-5'>
-    <Button variant="light" onClick={moveToLoginPage}>Press to Login</Button>{' '}
+    <div className='text-light'>Aleardy registered?</div>
+    <Button className='button' variant="light" onClick={moveToLoginPage}>
+    Press here to Login <i className="bi bi-door-open"></i> </Button>{' '}
     </div>
     <div className='mt-3'>
-    <Button variant="light" onClick={moveToRegisterPage}>Press to Register</Button>{' '}
+    <div className='text-light'>Not registered?</div>
+    <Button className='button' variant="light" onClick={moveToRegisterPage}>Press here to Register <i class="bi bi-pencil-square"></i></Button>{' '}
     </div>
     </div>
   );

@@ -17,7 +17,7 @@ function App() {
           <Routes>
           <Route path="/" element={<Login setUsername={setUsername} />}> </Route>
           <Route path="/register" element={<Register />}> </Route>
-          <Route path="dashboard" element={(username !== "") ? <Dashboard username={username}/> : <EmptyDashboard />}></Route>
+          <Route path="dashboard" element={(username !== "") ? <Dashboard  username={username}/> : <EmptyDashboard />}></Route>
         </Routes>
       </div>
     </div>
