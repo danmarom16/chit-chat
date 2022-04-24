@@ -88,9 +88,7 @@ function getLastMessage(myUsername, friendUsername) {
     lastMsg.content = "recording"
   } else if (lastMsg.type === "text"){
     if ((lastMsg.content).length > 26) {
-      console.log(lastMsg)
       lastMsg.content = (lastMsg.content).slice(0,26) + "..."
-      console.log(lastMsg)
     }
   }
   return lastMsg;

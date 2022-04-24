@@ -47,8 +47,6 @@ const Login = ( {setUsername} ) => {
       setUsername(values.username)
       navigate("/dashboard");
     }
-    else
-      console.log('not regiestered')
   };
 
   const onChange = (e) => {

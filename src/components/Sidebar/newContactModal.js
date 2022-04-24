@@ -25,7 +25,6 @@ function NewContactModal({ myUsername, myChats, handleAddChat}) {
   }
 
   function addChat() {
-    console.log(usernameRef.current.value)
     addNewChat(myUsername, usernameRef.current.value);
     handleAddChat([...myChats, usernameRef.current.value])
     handleClose();

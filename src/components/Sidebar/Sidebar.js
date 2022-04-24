@@ -7,8 +7,6 @@ import { getChats, getDisplayName, getLastMessage, getProfileImage } from "../Da
 
 function Sidebar({ username, handleSidebarClick }) {
 
-  console.log("render")
-
   // usernames of exists chats.
   const [openChats, setOpenChats] = useState(Object.keys(getChats(username)))
   const [searchValue, setSearchValue] = useState("")
