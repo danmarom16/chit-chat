@@ -23,6 +23,8 @@
 
 .sidebar-chat-info>h3{
     font-size: small;
+    display: flex; 
+    justify-content: space-between;
 }
 
 .sidebar-chat-info{

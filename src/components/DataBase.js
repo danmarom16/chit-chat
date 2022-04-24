@@ -79,9 +79,6 @@ function getChats(username) {
 }
 
 function getLastMessage(myUsername, friendUsername) {
-  console.log("in lmsg")
-  console.log(friendUsername)
-  console.log(db_msg_lists[myUsername])
   let lastMsg = {...((db_msg_lists[myUsername])[friendUsername]).at(-1)};
   if (lastMsg.type === "image"){
     lastMsg.content = "picture"
@@ -90,9 +87,9 @@ function getLastMessage(myUsername, friendUsername) {
   } else   if (lastMsg.type === "record"){
     lastMsg.content = "recording"
   } else if (lastMsg.type === "text"){
-    if ((lastMsg.content).length > 20) {
+    if ((lastMsg.content).length > 26) {
       console.log(lastMsg)
-      lastMsg.content = (lastMsg.content).slice(0,20) + "..."
+      lastMsg.content = (lastMsg.content).slice(0,26) + "..."
       console.log(lastMsg)
     }
   }
@@ -122,17 +119,11 @@ function addMessageToDatabase(myUsername, friendUsername, newMsg) {
 
 //meanwhile username will not be used.
 function addNewChat(myUsername, friendUsername){
-  console.log("in new Chat")
-  console.log(friendUsername)
-  console.log(db_msg_lists[myUsername])
   var today = new Date();
   var currentHour = today.getHours() + ":" + today.getMinutes();
   (db_msg_lists[myUsername])[friendUsername] = [
     {content: `Hello I'm ${getDisplayName(myUsername)}! How you doin?`,
      time: currentHour, isSender: true, type: "text" }];
-     console.log("in new Chat")
-     console.log(friendUsername)
-     console.log(db_msg_lists[myUsername])
 }
 
 export {
