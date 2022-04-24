@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 
 function UploadRecordModal({ sendRecord }) {
   const [show, setShow] = useState(false);
