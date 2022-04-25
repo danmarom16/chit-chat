@@ -24,10 +24,6 @@
     font-weight: 500;
 }
 
-.chat-header-info > p{
-    color: grey;
-}
-
 .chat-body{
     height: 85%;
     flex: 1;
@@ -114,7 +110,7 @@
     word-break: break-all
 }
 
-  .image-message{
+.image-message{
     max-width: 150px;
     justify-content: end;
 }

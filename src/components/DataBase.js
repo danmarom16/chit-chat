@@ -31,6 +31,8 @@ db_passwords["khamzat"] = "12345678!a";
 
 const db_msg_lists = {};
 
+db_msg_lists["dani"] = {};
+
 const message_list_asi = {};
 message_list_asi["conor"] = [
   { content: "suprise suprise mf", time: "3:50", isSender: false, type: "text" },
@@ -47,10 +49,22 @@ message_list_asi["khamzat"] = [
   { content: "I'm gonna smash everybody", time: "23:50", isSender: false, type: "text" },
 ];
 db_msg_lists["asi"] = message_list_asi;
-db_msg_lists["dani"] = {};
-db_msg_lists["adesanya"] = {};
-db_msg_lists["conor"] = {};
-db_msg_lists["khamzat"] = {};
+
+db_msg_lists["conor"] = {"asi": [
+  { content: "suprise suprise mf", time: "3:50", isSender: false, type: "text" },
+  { content: "THE KING IS BACK", time: "3:50", isSender: false, type: "text" },
+]};
+
+db_msg_lists["adesanya"] = {"asi": [
+  { content: "I'm the new dog in the yard", time: "12:21", isSender: true, type: "text" },
+  { content: "Bring me some fresh meat", time: "12:31", isSender: true, type: "text" },
+]};
+
+ 
+db_msg_lists["khamzat"] = {"asi": [
+  { content: "brother doesn't matter", time: "23:50", isSender: false, type: "text" },
+  { content: "I'm gonna smash everybody", time: "23:50", isSender: false, type: "text" },
+]};
 
 function isUsernameExists(username) {
   if (db_passwords[username] === undefined) {
