@@ -47,6 +47,10 @@ message_list_asi["khamzat"] = [
   { content: "I'm gonna smash everybody", time: "23:50", isSender: false, type: "text" },
 ];
 db_msg_lists["asi"] = message_list_asi;
+db_msg_lists["dani"] = {};
+db_msg_lists["adesanya"] = {};
+db_msg_lists["conor"] = {};
+db_msg_lists["khamzat"] = {};
 
 function isUsernameExists(username) {
   if (db_passwords[username] === undefined) {
@@ -118,7 +122,9 @@ function addMessageToDatabase(myUsername, friendUsername, newMsg) {
 //meanwhile username will not be used.
 function addNewChat(myUsername, friendUsername){
   var today = new Date();
-  var currentHour = today.getHours() + ":" + today.getMinutes();
+  var currentMin = today.getMinutes();
+  currentMin = (currentMin < 10) ? '0'+ currentMin : currentMin
+  var currentHour = today.getHours() + ":" + currentMin;
   (db_msg_lists[myUsername])[friendUsername] = [
     {content: `Hello I'm ${getDisplayName(myUsername)}! How you doin?`,
      time: currentHour, isSender: true, type: "text" }];
