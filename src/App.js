@@ -16,7 +16,7 @@ function App() {
       <div className='app-body'>
           <Routes>
           <Route path="/" element={<Login setUsername={setUsername} />}> </Route>
-          <Route path="/register" element={<Register />}> </Route>
+          <Route path="/register" element={<Register setUsername={setUsername} />}> </Route>
           <Route path="dashboard" element={(username !== "") ? <Dashboard  username={username}/> : <EmptyDashboard />}></Route>
         </Routes>
       </div>
