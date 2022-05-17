@@ -7,6 +7,8 @@ import Register from "./components/register/Register";
 import BrandingBar from './components/branding bar/BrandingBar'
 import EmptyDashboard from './components/dashboard/EmptyDashboard';
 
+import AxiosExample from './Tests/AxiosExample';
+
 function App() {
   const [username, setUsername] = useState("")
 
@@ -18,6 +20,7 @@ function App() {
           <Route path="/" element={<Login setUsername={setUsername} />}> </Route>
           <Route path="/register" element={<Register setUsername={setUsername} />}> </Route>
           <Route path="dashboard" element={(username !== "") ? <Dashboard  username={username}/> : <EmptyDashboard />}></Route>
+          <Route path="/Test" element={<AxiosExample/>}> </Route>
         </Routes>
       </div>
     </div>
