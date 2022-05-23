@@ -1,7 +1,10 @@
 import React from 'react'
 import './Chat.css'
-
-
+/**
+ * isSender will hold the value true if sender = loggedInUsername
+ * sender is property of msg
+ * 
+ */
 
 function Message({content, time, isSender, type}) {
     if(type == "image"){

@@ -3,22 +3,15 @@ import Axios from 'axios'
 
 function AxiosExample() {
     const [data, setData] = useState("");
-    const [count, setCount] = useState(0);
 
-    const handleClick = () => {
-      getData();
-      setCount(() => (count+1));
-      console.log(data);
-    }
-
-    async function getData() {
+    const getData = () => {
       try {
-         let res = await Axios.get("https://reqres.in/api/users/2");
-          if(res.status == 200){
-              // test for status you want, etc
-              console.log(res.status)
-              setData(JSON.stringify(res.data));
-          }    
+         Axios.get("https://reqres.in/api/users/2").then(
+           (res) => {
+            console.log(res);
+            setData(res.data.data.first_name)
+          }
+         )     
       }
       catch (err) {
           console.error(err);
@@ -28,9 +21,8 @@ function AxiosExample() {
   return (
     <div>
     <h1>AxiosExample</h1>
-    <button onClick={handleClick}> Click to make get Req</button> 
-    <h2>{count}</h2>
-    <h3>{data[count]}</h3>   
+    <button onClick={getData}> Click to make get Req</button> 
+    <h2>{data}</h2>
     </div>
   )
 }
