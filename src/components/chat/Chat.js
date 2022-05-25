@@ -6,23 +6,80 @@ import UploadImageModal from "./uploadFileModals/UploadImageModal"
 import UploadVideoModal from "./uploadFileModals/UploadVideoModal"
 import UploadRecordModal from "./uploadFileModals/UploadRecordModal"
 import { Dropdown } from "react-bootstrap";
-import {getChats, getDisplayName, getProfileImage, addMessageToDatabase} from '../DataBase'
+import {getDefualtImg} from '../DataBase'
 
-// The forceUpdate method updates the dashboard (last msg in sidebar chat)
-function Chat({forceUpdate, myUsername, friendUsername}) {
+import api from '../ContactsApi'
+
+const username =
+{
+  id: "peter",
+  name: "Pit",
+  server: "http://localhost:5241/"
+};
+
+function Chat({forceUpdate, contact, newMsgTracker}) {
 
   const textMsgRef = useRef();
   const dummy = useRef();
-
-  useEffect(() => { dummy.current.scrollIntoView({ behavior: 'smooth'}); });
+  useEffect(() => { dummy.current.scrollIntoView({ behavior: 'smooth' }); });
   
-  function getCurrentTime(){
-    var today = new Date();
-    var currentHour = today.getHours();
-    var currentMin = today.getMinutes();
-    currentMin = (currentMin < 10) ? '0'+currentMin : currentMin
-    return currentHour + ":" + currentMin;
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    getMessages()
+    console.log("use effect has been called");
+  }, [newMsgTracker, contact]);
+
+    // msg = {int id, string content, string created, bool sent}
+  const getMessages = () => {
+      try {
+        api.get(`/${contact.id}/Messages/${username.id}`).then(
+          (res) => {
+            console.log(res);
+            setMessages(res.data);
+          }
+        )
+      }
+      catch (err) {
+        console.error(err);
+      }
+    }
+  
+  const messagesList = messages.map((message, key) => {
+    return (
+      <Message
+        content={message.content}
+        time={message.created}
+        isSender={message.sent}
+        type="text"
+        key={key}
+      />
+    );
+  })
+
+  const sendMessage = (msgContent) => {
+    try {
+      api.post(`/${contact.id}/Messages/${username.id}`, msgContent)
+      .then((res) => {
+          console.log(res);
+          forceUpdate()
+        }
+      )
+    }
+    catch (err) {
+      console.error(err);
+    }
   }
+
+  const sendTextMessage = (e) => {
+    e.preventDefault();
+    if (textMsgRef.current.value != "") {
+      sendMessage(textMsgRef.current.value, "text");
+      textMsgRef.current.value = "";
+    }
+  };
+
+// --------- currently not supported -----------------------
 
   function sendImage (imgSrc){
     sendMessage(imgSrc, "image");
@@ -36,39 +93,15 @@ function Chat({forceUpdate, myUsername, friendUsername}) {
     sendMessage(recordSrc, "record");
   };
 
-  const sendTextMessage = (e) => {
-    e.preventDefault();
-    if (textMsgRef.current.value != "") {
-      sendMessage(textMsgRef.current.value, "text");
-      textMsgRef.current.value="";
-    }
-  };
-
-  const sendMessage = (msgContent, msgType) => {
-    var currentMsg = { content: msgContent, time: getCurrentTime(), isSender: true, type: msgType };
-    addMessageToDatabase(myUsername, friendUsername, currentMsg)
-    forceUpdate()
-  }
-
-  const messagesList = ((getChats(myUsername))[friendUsername]).map((message, key) => {
-    return (
-      <Message
-        content={message.content}
-        time={message.time}
-        isSender={message.isSender}
-        key={key}
-        type={message.type}
-      />
-    );
-  });
+// ---------------------------------------------------------
 
   return (
     <div className="chat">
       <div className="chat-header bright-2-brand-color">
-        <Avatar imgSrc={getProfileImage(friendUsername)}></Avatar>
+        <Avatar imgSrc={getDefualtImg()}></Avatar>
 
         <div className="chat-header-info">
-          <h3>{getDisplayName(friendUsername)}</h3>
+          <h3>{contact.name}</h3>
         </div>
       </div>
 
@@ -111,3 +144,12 @@ function Chat({forceUpdate, myUsername, friendUsername}) {
   }
 
 export default Chat;
+
+
+function getCurrentTime(){
+  var today = new Date();
+  var currentHour = today.getHours();
+  var currentMin = today.getMinutes();
+  currentMin = (currentMin < 10) ? '0'+currentMin : currentMin
+  return currentHour + ":" + currentMin;
+}

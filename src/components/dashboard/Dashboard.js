@@ -3,20 +3,16 @@ import Sidebar from '../sidebar/Sidebar'
 import Chat from '../chat/Chat'
 import EmptyChat from '../chat/EmptyChat';
 
-function UseForceUpdate(){
-  const [value, setValue] = useState(0); // integer state
-  return () => setValue(value => value + 1); // update the state to force render
-}
-
 function Dashboard({username}) {
-  const [activeChat, setActiveChat] = useState("");
-  const forceUpdate = UseForceUpdate();
+  const [activeContact, setActiveContact] = useState(null);
+  const [value, setValue] = useState(0)
+  const forceUpdate = () => setValue(value => value + 1);
 
   return (
     <>
-        <Sidebar username={username} handleSidebarClick={setActiveChat}/>
-        {(activeChat !== "") ?
-         <Chat forceUpdate={forceUpdate} myUsername={username} friendUsername={activeChat}/> :
+        <Sidebar handleSidebarClick={setActiveContact} newMsgTracker={value}/>
+        {(activeContact !== null) ?
+         <Chat forceUpdate={forceUpdate} contact={activeContact} newMsgTracker={value}/> :
           <EmptyChat/> }
     </>
   );

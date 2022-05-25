@@ -2,10 +2,10 @@ import React from 'react'
 import Avatar from './Avatar'
 import './SidebarChat.css'
 import Message from '../chat/Message'
-function SidebarChat({myUsername, displayName, lastMessage, profilePicture, handleClick}) {
+function SidebarChat({myUsername, displayName, LastMsg, LastMsgDate, profilePicture, handleClick}) {
 
   const onClick = e => {
-    handleClick(myUsername)
+    handleClick({id: myUsername, name: displayName})
   }
 
   return (
@@ -14,8 +14,8 @@ function SidebarChat({myUsername, displayName, lastMessage, profilePicture, hand
       <div className='sidebar-chat-info'>
             <h2 >{displayName}</h2>
             <h3> 
-            <div className="text-muted">{lastMessage.content}</div>
-            <small className="text-muted" > {lastMessage.time}</small>
+            <div className="text-muted">{LastMsg ? LastMsg : ""}</div>
+            <small className="text-muted" > {LastMsgDate ? LastMsgDate : ""}</small>
              </h3>
       </div>
     </div>

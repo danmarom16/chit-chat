@@ -1,33 +1,48 @@
 import React, { useRef, useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 import { isUsernameExists, addNewChat, getChats } from "../DataBase";
+  /*
+  if (!isUsernameExists(usernameRef.current.value)) {
+    alert("Username not found 404!");
+  } else if (usernameRef.current.value === myUsername) {
+    alert("Can't create chat with yourself");
+  } else if (myChats.includes(usernameRef.current.value)) {
+    alert("Chat already exists");
+  }
+  */
 
-function NewContactModal({ myUsername, myChats, handleAddChat}) {
+import api from '../ContactsApi'
+
+function NewContactModal({ myUsername, updateContactList}) {
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const usernameRef = useRef();
+  const nameRef = useRef();
+  const serverRef = useRef();
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!isUsernameExists(usernameRef.current.value)) {
-      alert("Username not found 404!");
-    } else if (usernameRef.current.value === myUsername) {
-      alert("Can't create chat with yourself");
-    } else if (myChats.includes(usernameRef.current.value)) {
-      alert("Chat already exists");
+    const request = JSON.stringify({
+      id: usernameRef.current.value,
+      name: serverRef.current.value,
+      server: serverRef.current.value,
+      });
+    try {
+      api.post(`/${myUsername}`, request).then(
+        (res) => {
+          console.log(res);
+          updateContactList();
+          handleClose();
+        }
+      )
     }
-    else {
-      addChat();
+    catch (err) {
+      console.error(err);
+      alert("Error accured on adding new contact");
     }
-  }
-
-  function addChat() {
-    addNewChat(myUsername, usernameRef.current.value);
-    handleAddChat([...myChats, usernameRef.current.value])
-    handleClose();
   }
 
   return (
@@ -43,6 +58,10 @@ function NewContactModal({ myUsername, myChats, handleAddChat}) {
             <Form.Group>
               <Form.Label className="text-black">Contact's identifier</Form.Label>
               <Form.Control type="text" ref={usernameRef} required />
+              <Form.Label className="text-black">Contact's display name</Form.Label>
+              <Form.Control type="text" ref={nameRef} required />
+              <Form.Label className="text-black">Contact's server</Form.Label>
+              <Form.Control type="text" ref={serverRef} required />
             </Form.Group>
             <Button variant="secondary" type="submit">Add</Button>
           </Form>
