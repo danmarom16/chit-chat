@@ -64,22 +64,33 @@ const Register = ( {setUsername} ) => {
     },
   ];
 
+  // ----------- not supported -----------------
   const handleUploadImage = (e) => {
     setValues({ ...values, ["imgUrl"]: URL.createObjectURL(e.target.files[0]) });
   }
+  // -------------------------------------------
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      createNewUser({
-        username: values.username,
-        displayName: values.displayName,
-        profilePic: values.imgUrl,
-        password: values.password,
-      })
-    ){
-      setUsername(values.username)
-      navigate("/dashboard");
+
+    const request = JSON.stringify({
+      id: values.username,
+      name: values.displayName,
+      password: values.password,
+      });
+      
+    try {
+      api.post('/Users/Register', request).then(
+        (res) => {
+          console.log(res);
+          setloggedUser(res.data)
+          navigate("/dashboard");
+        }
+      )
+    }
+    catch (err) {
+      console.error(err);
+      alert("Wrong username or password");
     }
   };
 

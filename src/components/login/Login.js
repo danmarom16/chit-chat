@@ -7,9 +7,10 @@ import { Link } from "react-router-dom"
 import { checkLogin } from "../DataBase";
 import { useNavigate } from "react-router-dom";
 
+import api from '../ContactsApi'
 
 // onLoginSubmit is a setter for the user's data
-const Login = ( {setUsername} ) => {
+const Login = ( {setloggedUser} ) => {
   const [values, setValues] = useState({
     username: "",
     password: "",
@@ -43,9 +44,24 @@ const Login = ( {setUsername} ) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(checkLogin(values)){
-      setUsername(values.username)
-      navigate("/dashboard");
+
+    const request = JSON.stringify({
+      id: values.username,
+      password: values.password,
+      });
+
+    try {
+      api.post('/Users/Login', request).then(
+        (res) => {
+          console.log(res);
+          setloggedUser(res.data)
+          navigate("/dashboard");
+        }
+      )
+    }
+    catch (err) {
+      console.error(err);
+      alert("Wrong username or password");
     }
   };
 
