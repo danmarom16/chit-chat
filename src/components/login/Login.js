@@ -51,7 +51,7 @@ const Login = ( {setLoggedUser} ) => {
       });
 
     try {
-      api.post('/contacts/Users/Login/', request).then(
+      api.post('/Login/', request).then(
         (res) => {
           console.log(res);
           setLoggedUser(res.data)

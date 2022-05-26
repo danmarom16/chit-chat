@@ -82,7 +82,7 @@ const Register = ( {setLoggedUser} ) => {
       });
       
     try {
-      api.post('/contacts/Users/Register/', request).then(
+      api.post('/Register/', request).then(
         (res) => {
           console.log(res);
           setLoggedUser(res.data)
