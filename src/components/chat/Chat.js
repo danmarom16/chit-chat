@@ -7,16 +7,8 @@ import UploadVideoModal from "./uploadFileModals/UploadVideoModal"
 import UploadRecordModal from "./uploadFileModals/UploadRecordModal"
 import { Dropdown } from "react-bootstrap";
 import {getDefualtImg} from '../DataBase'
-import axios from "axios";
 
-import api from '../ContactsApi'
-
-const toto = axios.create({
-  baseURL: 'http://localhost:5241/api/',
-  headers: {
-    'Content-Type': 'application/json'
-  }
-});
+import api from '../WebApi'
 
 function Chat({loggedUser, forceUpdate, contact, newMsgTracker}) {
 
@@ -34,7 +26,7 @@ function Chat({loggedUser, forceUpdate, contact, newMsgTracker}) {
     // msg = {int id, string content, string created, bool sent}
   const getMessages = () => {
       try {
-        api.get(`/${contact.id}/Messages/${loggedUser.id}`).then(
+        api.get(`/contacts/${contact.id}/Messages/${loggedUser.id}`).then(
           (res) => {
             console.log(res);
             console.log("get Messages");
@@ -62,35 +54,14 @@ function Chat({loggedUser, forceUpdate, contact, newMsgTracker}) {
 
 
 
-  const sendMessage = (msgContent) => {
-    console.log("sendMessage 1");
-    console.log(contact);
-    console.log(loggedUser);
-    if (contact.server != loggedUser.server){
-      console.log("sendMessage diff servers");
-      try {
-        api.post(`/${contact.id}/Messages/${loggedUser.id}`, msgContent)
-        .then((res) => {
-            console.log(res);
-          }
-        )
-      }
-      catch (err) {
-        console.log("error sendMessage diff servers");
-        console.error(err);
-      }
-    }
-    const url = "http://" + contact.server + "/api/Transfer";
+  const sendMessage = (msgContent, type) => {
     const request = JSON.stringify({
       from: loggedUser.id,
       to: contact.id,
       content: msgContent,
       });
-      console.log("sendMessage 2");
-      console.log(url);
-      console.log(request);
     try {
-      toto.post('/Transfer', request)
+      api.post('/transfer/', request)
       .then((res) => {
           console.log(res);
           forceUpdate()
@@ -99,7 +70,7 @@ function Chat({loggedUser, forceUpdate, contact, newMsgTracker}) {
     }
     catch (err) {
       console.error(err);
-      console.log("sendMessage 3 Error");
+      console.log("sendMessage Error");
       return;
     }
 }

@@ -5,7 +5,7 @@ import Avatar from "./Avatar";
 import NewContactModal from "./newContactModal";
 import { getDefualtImg } from "../DataBase";
 
-import api from '../ContactsApi'
+import api from '../WebApi'
 
 function Sidebar({loggedUser, handleSidebarClick , newMsgTracker}) {
   // contact = {id, name, server, last, lastdate}
@@ -14,7 +14,7 @@ function Sidebar({loggedUser, handleSidebarClick , newMsgTracker}) {
 
   const getContact = () => {
     try {
-      api.get(`/${loggedUser.id}`).then(
+      api.get(`/contacts/${loggedUser.id}`).then(
         (res) => {
           console.log(res);
           setContacts(res.data);
@@ -27,8 +27,8 @@ function Sidebar({loggedUser, handleSidebarClick , newMsgTracker}) {
   }
 
   useEffect(() => {
+    console.log("Call getContact inside useEffect");
     getContact()
-    console.log("use effect has been called");
   }, [newMsgTracker]
   )
 

@@ -11,7 +11,7 @@ import { isUsernameExists, addNewChat, getChats } from "../DataBase";
   }
   */
 
-import api from '../ContactsApi'
+import api from '../WebApi'
 
 function NewContactModal({ myUsername, updateContactList}) {
 
@@ -20,18 +20,17 @@ function NewContactModal({ myUsername, updateContactList}) {
   const handleShow = () => setShow(true);
 
   const usernameRef = useRef();
-  const nameRef = useRef();
   const serverRef = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const request = JSON.stringify({
-      id: usernameRef.current.value,
-      name: nameRef.current.value,
+      from: myUsername,
+      to: usernameRef.current.value,
       server: serverRef.current.value,
       });
     try {
-      api.post(`/${myUsername}`, request).then(
+      api.post('/invitations/', request).then(
         (res) => {
           console.log(res);
           updateContactList();
@@ -58,8 +57,6 @@ function NewContactModal({ myUsername, updateContactList}) {
             <Form.Group>
               <Form.Label className="text-black">Contact's identifier</Form.Label>
               <Form.Control type="text" ref={usernameRef} required />
-              <Form.Label className="text-black">Contact's display name</Form.Label>
-              <Form.Control type="text" ref={nameRef} required />
               <Form.Label className="text-black">Contact's server</Form.Label>
               <Form.Control type="text" ref={serverRef} required />
             </Form.Group>

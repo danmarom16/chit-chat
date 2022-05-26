@@ -3,7 +3,7 @@ import Avatar from "../components/sidebar/Avatar"
 import { getDefualtImg } from "../components/DataBase"
 import Message from "../components/chat/Message"
 
-import api from '../components/ContactsApi'
+import api from '../components/WebApi'
 
 const contact = 
 {
@@ -35,7 +35,7 @@ function AxiosExample() {
   // msg = {int id, string content, string created, bool sent}
   const getMessages = () => {
     try {
-      api.get(`/${contact.id}/Messages/${username.id}`).then(
+      api.get(`/contacts/${contact.id}/Messages/${username.id}`).then(
         (res) => {
           console.log(res);
           setMessages(res.data);
@@ -61,7 +61,7 @@ function AxiosExample() {
 
   const sendMessage = (msgContent) => {
     try {
-      api.post(`/${contact.id}/Messages/${username.id}`,{}
+      api.post(`/contacts/${contact.id}/Messages/${username.id}`,{}
       ,{params: {"content": msgContent}})
       .then((res) => {
           console.log(res);

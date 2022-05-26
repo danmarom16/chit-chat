@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 import {createNewUser} from "../DataBase.js"
 import { useNavigate } from 'react-router-dom';
 
-import api from '../ContactsApi'
+import api from '../WebApi'
 
 const Register = ( {setLoggedUser} ) => {
   var defImg = "https://cdn.dribbble.com/users/1577045/screenshots/4914645/media/028d394ffb00cb7a4b2ef9915a384fd9.png?compress=1&resize=400x300&vertical=top";
@@ -82,7 +82,7 @@ const Register = ( {setLoggedUser} ) => {
       });
       
     try {
-      api.post('/Users/Register/', request).then(
+      api.post('/contacts/Users/Register/', request).then(
         (res) => {
           console.log(res);
           setLoggedUser(res.data)

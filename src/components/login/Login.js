@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 import { checkLogin } from "../DataBase";
 import { useNavigate } from "react-router-dom";
 
-import api from '../ContactsApi'
+import api from '../WebApi'
 
 // onLoginSubmit is a setter for the user's data
 const Login = ( {setLoggedUser} ) => {
@@ -51,7 +51,7 @@ const Login = ( {setLoggedUser} ) => {
       });
 
     try {
-      api.post('/Users/Login/', request).then(
+      api.post('/contacts/Users/Login/', request).then(
         (res) => {
           console.log(res);
           setLoggedUser(res.data)
