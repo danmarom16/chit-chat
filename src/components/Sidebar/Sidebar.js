@@ -41,11 +41,12 @@ function Sidebar({loggedUser, handleSidebarClick , newMsgTracker}) {
   const contactListResult = contactList.map((contact, key) => {
     return (
       <SidebarChat
+      username={contact.id}
         displayName={contact.name}
-        LastMsg={contact.last}
-        LastMsgDate={contact.lastdate}
-        profilePicture={getDefualtImg()}
-        myUsername={contact.id}
+        cServer={contact.server}
+        lastMsg={contact.last}
+        lastMsgDate={contact.lastdate}
+        profilePic={getDefualtImg()}     
         key={key}
         handleClick={handleSidebarClick}
       />

@@ -30,6 +30,8 @@ function Chat({loggedUser, forceUpdate, contact, newMsgTracker}) {
         api.get(`/${contact.id}/Messages/${loggedUser.id}`).then(
           (res) => {
             console.log(res);
+            console.log("current contact");
+            console.log(contact);
             setMessages(res.data);
           }
         )
@@ -55,7 +57,7 @@ function Chat({loggedUser, forceUpdate, contact, newMsgTracker}) {
 
 
   const sendMessage = (msgContent) => {
-
+    console.log(contact);
     if (contact.server != loggedUser.server){
       try {
         api.post(`/${contact.id}/Messages/${loggedUser.id}`, msgContent)
@@ -68,6 +70,7 @@ function Chat({loggedUser, forceUpdate, contact, newMsgTracker}) {
         console.error(err);
       }
     }
+    console.log(contact);
     const url = "http://" + contact.server + "/api/transfer/";
     const request = JSON.stringify({
       from: loggedUser.id,
