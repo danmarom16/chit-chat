@@ -7,17 +7,11 @@ import UploadVideoModal from "./uploadFileModals/UploadVideoModal"
 import UploadRecordModal from "./uploadFileModals/UploadRecordModal"
 import { Dropdown } from "react-bootstrap";
 import {getDefualtImg} from '../DataBase'
+import Axios from "axios";
 
 import api from '../ContactsApi'
 
-const username =
-{
-  id: "peter",
-  name: "Pit",
-  server: "http://localhost:5241/"
-};
-
-function Chat({forceUpdate, contact, newMsgTracker}) {
+function Chat({loggedUser, forceUpdate, contact, newMsgTracker}) {
 
   const textMsgRef = useRef();
   const dummy = useRef();
@@ -33,7 +27,7 @@ function Chat({forceUpdate, contact, newMsgTracker}) {
     // msg = {int id, string content, string created, bool sent}
   const getMessages = () => {
       try {
-        api.get(`/${contact.id}/Messages/${username.id}`).then(
+        api.get(`/${contact.id}/Messages/${loggedUser.id}`).then(
           (res) => {
             console.log(res);
             setMessages(res.data);
@@ -57,9 +51,31 @@ function Chat({forceUpdate, contact, newMsgTracker}) {
     );
   })
 
+
+
+
   const sendMessage = (msgContent) => {
+
+    if (contact.server != loggedUser.server){
+      try {
+        api.post(`/${contact.id}/Messages/${loggedUser.id}`, msgContent)
+        .then((res) => {
+            console.log(res);
+          }
+        )
+      }
+      catch (err) {
+        console.error(err);
+      }
+    }
+    const url = "http://" + contact.server + "/api/transfer/";
+    const request = JSON.stringify({
+      from: loggedUser.id,
+      to: contact.id,
+      content: msgContent,
+      });
     try {
-      api.post(`/${contact.id}/Messages/${username.id}`, msgContent)
+      Axios.post(url, request)
       .then((res) => {
           console.log(res);
           forceUpdate()
@@ -68,8 +84,10 @@ function Chat({forceUpdate, contact, newMsgTracker}) {
     }
     catch (err) {
       console.error(err);
+      alert("An error accured while tying to forward your message!");
+      return;
     }
-  }
+}
 
   const sendTextMessage = (e) => {
     e.preventDefault();

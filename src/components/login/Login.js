@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import api from '../ContactsApi'
 
 // onLoginSubmit is a setter for the user's data
-const Login = ( {setloggedUser} ) => {
+const Login = ( {setLoggedUser} ) => {
   const [values, setValues] = useState({
     username: "",
     password: "",
@@ -51,10 +51,10 @@ const Login = ( {setloggedUser} ) => {
       });
 
     try {
-      api.post('/Users/Login', request).then(
+      api.post('/Users/Login/', request).then(
         (res) => {
           console.log(res);
-          setloggedUser(res.data)
+          setLoggedUser(res.data)
           navigate("/dashboard");
         }
       )

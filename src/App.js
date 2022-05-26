@@ -17,8 +17,8 @@ function App() {
       <BrandingBar/>
       <div className='app-body'>
           <Routes>
-          <Route path="/" element={<Login setloggedUser={setLoggedUser} />}> </Route>
-          <Route path="/register" element={<Register setloggedUser={setLoggedUser} />}> </Route>
+          <Route path="/" element={<Login setLoggedUser={setLoggedUser} />}> </Route>
+          <Route path="/register" element={<Register setLoggedUser={setLoggedUser} />}> </Route>
           <Route path="dashboard" element={(loggedUser !== null) ? <Dashboard  loggedUser={loggedUser}/> : <EmptyDashboard />}></Route>
           <Route path="/Test" element={<AxiosExample/>}> </Route>
         </Routes>

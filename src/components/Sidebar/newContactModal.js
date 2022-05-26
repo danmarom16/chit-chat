@@ -27,7 +27,7 @@ function NewContactModal({ myUsername, updateContactList}) {
     e.preventDefault();
     const request = JSON.stringify({
       id: usernameRef.current.value,
-      name: serverRef.current.value,
+      name: nameRef.current.value,
       server: serverRef.current.value,
       });
     try {

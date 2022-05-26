@@ -7,21 +7,14 @@ import { getDefualtImg } from "../DataBase";
 
 import api from '../ContactsApi'
 
-const username =
-{
-  id: "peter",
-  name: "Pit",
-  server: "http://localhost:5241/"
-};
-
-function Sidebar({ handleSidebarClick , newMsgTracker}) {
+function Sidebar({loggedUser, handleSidebarClick , newMsgTracker}) {
   // contact = {id, name, server, last, lastdate}
   const [contacts, setContacts] = useState([])
   const [searchValue, setSearchValue] = useState("")
 
   const getContact = () => {
     try {
-      api.get(`/${username.id}`).then(
+      api.get(`/${loggedUser.id}`).then(
         (res) => {
           console.log(res);
           setContacts(res.data);
@@ -66,10 +59,10 @@ function Sidebar({ handleSidebarClick , newMsgTracker}) {
           <Avatar imgSrc={getDefualtImg()}></Avatar>
         </div>
         <div className="user-login-name" xl={3} md={3} sm={3} xs={3}>
-          {username.name}
+          {loggedUser.name}
         </div>
         <div xl={3} md={3} sm={3} xs={3} className="sidebar-header-right">
-          <NewContactModal myUsername={username.id} updateContactList={getContact}/>
+          <NewContactModal myUsername={loggedUser.id} updateContactList={getContact}/>
         </div>
       </div>
       <div className="sidebar-search bright-3-brand-color">
