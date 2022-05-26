@@ -7,9 +7,16 @@ import UploadVideoModal from "./uploadFileModals/UploadVideoModal"
 import UploadRecordModal from "./uploadFileModals/UploadRecordModal"
 import { Dropdown } from "react-bootstrap";
 import {getDefualtImg} from '../DataBase'
-import Axios from "axios";
+import axios from "axios";
 
 import api from '../ContactsApi'
+
+const toto = axios.create({
+  baseURL: 'http://localhost:5241/api/',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
 
 function Chat({loggedUser, forceUpdate, contact, newMsgTracker}) {
 
@@ -30,8 +37,7 @@ function Chat({loggedUser, forceUpdate, contact, newMsgTracker}) {
         api.get(`/${contact.id}/Messages/${loggedUser.id}`).then(
           (res) => {
             console.log(res);
-            console.log("current contact");
-            console.log(contact);
+            console.log("get Messages");
             setMessages(res.data);
           }
         )
@@ -57,8 +63,11 @@ function Chat({loggedUser, forceUpdate, contact, newMsgTracker}) {
 
 
   const sendMessage = (msgContent) => {
+    console.log("sendMessage 1");
     console.log(contact);
+    console.log(loggedUser);
     if (contact.server != loggedUser.server){
+      console.log("sendMessage diff servers");
       try {
         api.post(`/${contact.id}/Messages/${loggedUser.id}`, msgContent)
         .then((res) => {
@@ -67,18 +76,21 @@ function Chat({loggedUser, forceUpdate, contact, newMsgTracker}) {
         )
       }
       catch (err) {
+        console.log("error sendMessage diff servers");
         console.error(err);
       }
     }
-    console.log(contact);
-    const url = "http://" + contact.server + "/api/transfer/";
+    const url = "http://" + contact.server + "/api/Transfer";
     const request = JSON.stringify({
       from: loggedUser.id,
       to: contact.id,
       content: msgContent,
       });
+      console.log("sendMessage 2");
+      console.log(url);
+      console.log(request);
     try {
-      Axios.post(url, request)
+      toto.post('/Transfer', request)
       .then((res) => {
           console.log(res);
           forceUpdate()
@@ -87,7 +99,7 @@ function Chat({loggedUser, forceUpdate, contact, newMsgTracker}) {
     }
     catch (err) {
       console.error(err);
-      alert("An error accured while tying to forward your message!");
+      console.log("sendMessage 3 Error");
       return;
     }
 }
