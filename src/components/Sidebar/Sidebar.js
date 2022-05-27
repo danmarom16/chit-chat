@@ -5,29 +5,14 @@ import Avatar from "./Avatar";
 import NewContactModal from "./newContactModal";
 import { getDefualtImg } from "../DataBase";
 
-import api from '../WebApi'
 
-function Sidebar({loggedUser, handleSidebarClick , newMsgTracker}) {
+
+function Sidebar({loggedUser, handleSidebarClick , newMsgTracker, getContact, contacts}) {
   // contact = {id, name, server, last, lastdate}
-  const [contacts, setContacts] = useState([])
+
   const [searchValue, setSearchValue] = useState("")
 
-  const getContact = () => {
-    try {
-      api.get(`/contacts/${loggedUser.id}`).then(
-        (res) => {
-          console.log(res);
-          setContacts(res.data);
-        }
-      )
-    }
-    catch (err) {
-      console.error(err);
-    }
-  }
-
   useEffect(() => {
-    console.log("Call getContact inside useEffect");
     getContact()
   }, [newMsgTracker]
   )

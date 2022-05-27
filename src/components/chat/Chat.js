@@ -8,19 +8,46 @@ import UploadRecordModal from "./uploadFileModals/UploadRecordModal"
 import { Dropdown } from "react-bootstrap";
 import {getDefualtImg} from '../DataBase'
 
+import {signalR, HubConnectionBuilder, LogLevel} from "@microsoft/signalr"
 import api from '../WebApi'
 
-function Chat({loggedUser, forceUpdate, contact, newMsgTracker}) {
+function Chat({loggedUser, forceUpdate, contact, newMsgTracker, getContact}) {
 
   const textMsgRef = useRef();
   const dummy = useRef();
   useEffect(() => { dummy.current.scrollIntoView({ behavior: 'smooth' }); });
-  
   const [messages, setMessages] = useState([]);
+  const [connection, setConnection] = useState(false);
 
+  const getContactUpdate = async () => {
+    try{
+      const hubConnection = new HubConnectionBuilder().withUrl("http://localhost:5241/chathub", {withCredentials: (false)}).build();
+      console.log("Connection Set")
+      setConnection(true);
+      await hubConnection.start();
+      console.log("Connection Started")
+      hubConnection.on("TriggerGetContacts", (sentUser) => {
+        console.log("TriggerGetContacts fired")
+        var sentUserToString = JSON.parse(sentUser);
+        if(loggedUser.name === sentUserToString){
+
+          console.log("in condition")
+          getContact();
+          console.log("got contacts")
+          forceUpdate();
+        }
+      })
+
+      await hubConnection.invoke("getContactUpdate", JSON.stringify(contact.name));
+      
+    } catch (e){
+      console.log(e);
+    }
+  }
+
+  
   useEffect(() => {
     getMessages()
-    console.log("use effect has been called");
   }, [newMsgTracker, contact]);
 
     // msg = {int id, string content, string created, bool sent}
@@ -28,8 +55,6 @@ function Chat({loggedUser, forceUpdate, contact, newMsgTracker}) {
       try {
         api.get(`/contacts/${contact.id}/Messages/${loggedUser.id}`).then(
           (res) => {
-            console.log(res);
-            console.log("get Messages");
             setMessages(res.data);
           }
         )
@@ -63,8 +88,8 @@ function Chat({loggedUser, forceUpdate, contact, newMsgTracker}) {
     try {
       api.post('/transfer/', request)
       .then((res) => {
-          console.log(res);
-          forceUpdate()
+          getContactUpdate();
+          getMessages();
         }
       )
     }
