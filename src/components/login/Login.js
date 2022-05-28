@@ -1,16 +1,16 @@
 import React from "react";
 import { useState } from "react";
 import "./Login.css";
-import FormInput from '../formInput/FormInput'
+import FormInput from "../formInput/FormInput";
 import { Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import { checkLogin } from "../DataBase";
 import { useNavigate } from "react-router-dom";
 
-import api from '../WebApi'
+import api from "../WebApi";
 
 // onLoginSubmit is a setter for the user's data
-const Login = ( {setLoggedUser} ) => {
+const Login = ({ setLoggedUser }) => {
   const [values, setValues] = useState({
     username: "",
     password: "",
@@ -37,7 +37,8 @@ const Login = ( {setLoggedUser} ) => {
       errorMessage:
         "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
       label: "Password",
-      pattern: "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$",
+      pattern:
+        "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$",
       required: true,
     },
   ];
@@ -48,18 +49,15 @@ const Login = ( {setLoggedUser} ) => {
     const request = JSON.stringify({
       id: values.username,
       password: values.password,
-      });
+    });
 
     try {
-      api.post('/Login/', request).then(
-        (res) => {
-          console.log(res);
-          setLoggedUser(res.data)
-          navigate("/dashboard");
-        }
-      )
-    }
-    catch (err) {
+      api.post("/Login/", request).then((res) => {
+        console.log(res);
+        setLoggedUser(res.data);
+        navigate("/dashboard");
+      });
+    } catch (err) {
       console.error(err);
       alert("Wrong username or password");
     }
@@ -74,7 +72,8 @@ const Login = ( {setLoggedUser} ) => {
       <form className="animated login-form" onSubmit={handleSubmit}>
         <h1 className="login-title">Login Page</h1>
         {inputs.map((input) => (
-          <FormInput className="login-form-input"
+          <FormInput
+            className="login-form-input"
             key={input.id}
             {...input}
             value={values[input.name]}
@@ -83,12 +82,13 @@ const Login = ( {setLoggedUser} ) => {
         ))}
         <button className="login-button">Sign In</button>
         <Row className="register-line mb-2">
-            <Col>
-                Not registered yet?
-            </Col>
-            <Col>
+          <Col>Not registered yet?</Col>
+          <Col>
             <Link to="/register">Click Here.</Link>
-            </Col>
+          </Col>
+        </Row>
+        <Row className="register-line mb-2">
+          <Col>Click <a href="http://localhost:5183/Feedbacks/Search"> Click Here </a> To see our ratings ⭐</Col>
         </Row>
       </form>
     </div>
