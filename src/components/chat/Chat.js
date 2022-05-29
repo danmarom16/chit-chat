@@ -89,7 +89,7 @@ function Chat({loggedUser, forceUpdate, contact, newMsgTracker, getContact}) {
       api.post('/transfer/', request)
       .then((res) => {
           getContactUpdate();
-          getMessages();
+          forceUpdate();
         }
       )
     }
