@@ -65,9 +65,12 @@ The supported messages are:
 (All the listed below are accesible through the pop-up menue)
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/92876036/165119208-ecd8dd50-7a75-4343-92f2-59823c38ac1f.gif)
 
+_______________________________________________
+currently not supported
 2) Image message - by clicking the image icon in the pop-up menu and adding the desired image.
 3) Video message - by clicking the video icon.
 4) Audio message - by clicking the audio icon and holding the record button in the opened modal.
+_______________________________________________
 
 ## Used packages
 React-bootstrap is the main building block we used to build the current version.
