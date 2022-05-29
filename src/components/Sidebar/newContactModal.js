@@ -29,19 +29,17 @@ function NewContactModal({ myUsername, updateContactList}) {
       to: usernameRef.current.value,
       server: serverRef.current.value,
       });
-    try {
-      api.post('/invitations/', request).then(
-        (res) => {
-          console.log(res);
-          updateContactList();
-          handleClose();
-        }
-      )
-    }
-    catch (err) {
+
+    api.post('/invitations/', request).then(
+      (res) => {
+        console.log(res);
+        updateContactList();
+        handleClose();
+      }
+    ).catch((err) => {
       console.error(err);
       alert("Error accured on adding new contact");
-    }
+    });
   }
 
   return (

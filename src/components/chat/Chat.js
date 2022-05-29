@@ -8,43 +8,15 @@ import UploadRecordModal from "./uploadFileModals/UploadRecordModal"
 import { Dropdown } from "react-bootstrap";
 import {getDefualtImg} from '../DataBase'
 
-import {signalR, HubConnectionBuilder, LogLevel} from "@microsoft/signalr"
+
 import api from '../WebApi'
 
-function Chat({loggedUser, forceUpdate, contact, newMsgTracker, getContact}) {
+function Chat({connection, loggedUser, forceUpdate, contact, newMsgTracker, getContact}) {
 
   const textMsgRef = useRef();
   const dummy = useRef();
   useEffect(() => { dummy.current.scrollIntoView({ behavior: 'smooth' }); });
   const [messages, setMessages] = useState([]);
-  const [connection, setConnection] = useState(false);
-
-  const getContactUpdate = async () => {
-    try{
-      const hubConnection = new HubConnectionBuilder().withUrl("http://localhost:5241/chathub", {withCredentials: (false)}).build();
-      console.log("Connection Set")
-      setConnection(true);
-      await hubConnection.start();
-      console.log("Connection Started")
-      hubConnection.on("TriggerGetContacts", (sentUser) => {
-        console.log("TriggerGetContacts fired")
-        var sentUserToString = JSON.parse(sentUser);
-        if(loggedUser.name === sentUserToString){
-
-          console.log("in condition")
-          getContact();
-          console.log("got contacts")
-          forceUpdate();
-        }
-      })
-
-      await hubConnection.invoke("getContactUpdate", JSON.stringify(contact.name));
-      
-    } catch (e){
-      console.log(e);
-    }
-  }
-
   
   useEffect(() => {
     getMessages()
@@ -52,16 +24,13 @@ function Chat({loggedUser, forceUpdate, contact, newMsgTracker, getContact}) {
 
     // msg = {int id, string content, string created, bool sent}
   const getMessages = () => {
-      try {
         api.get(`/contacts/${contact.id}/Messages/${loggedUser.id}`).then(
           (res) => {
             setMessages(res.data);
           }
-        )
-      }
-      catch (err) {
-        console.error(err);
-      }
+        ).catch((err)=>{
+          console.error(err);
+        });
     }
   
   const messagesList = messages.map((message, key) => {
@@ -85,19 +54,13 @@ function Chat({loggedUser, forceUpdate, contact, newMsgTracker, getContact}) {
       to: contact.id,
       content: msgContent,
       });
-    try {
-      api.post('/transfer/', request)
-      .then((res) => {
-          getContactUpdate();
-          forceUpdate();
-        }
-      )
-    }
-    catch (err) {
+    api.post('/transfer/', request)
+    .then((res) => {
+        connection.invoke("getContactUpdate", JSON.stringify(contact.id)).then(forceUpdate()); 
+      }
+    ).catch((err) => {
       console.error(err);
-      console.log("sendMessage Error");
-      return;
-    }
+    });
 }
 
   const sendTextMessage = (e) => {

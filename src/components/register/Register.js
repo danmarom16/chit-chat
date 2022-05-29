@@ -81,19 +81,17 @@ const Register = ( {setLoggedUser} ) => {
       password: values.password,
       });
       
-    try {
+
       api.post('/Register/', request).then(
         (res) => {
           console.log(res);
           setLoggedUser(res.data)
           navigate("/dashboard");
         }
-      )
-    }
-    catch (err) {
-      console.error(err);
-      alert("Wrong username or password");
-    }
+      ).catch((err) => {
+        console.error(err);
+        alert("Wrong username or password");
+      });
   };
 
   const onChange = (e) => {

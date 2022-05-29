@@ -50,17 +50,16 @@ const Login = ({ setLoggedUser }) => {
       id: values.username,
       password: values.password,
     });
-
-    try {
-      api.post("/Login/", request).then((res) => {
-        console.log(res);
-        setLoggedUser(res.data);
-        navigate("/dashboard");
-      });
-    } catch (err) {
+   
+    api.post("/Login/", request).then((res) => {
+      console.log(res);
+      setLoggedUser(res.data);
+      navigate("/dashboard");
+    }).catch((err) => {
+      console.error("in catch");
       console.error(err);
       alert("Wrong username or password");
-    }
+    }) 
   };
 
   const onChange = (e) => {
