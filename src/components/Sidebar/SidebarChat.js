@@ -1,7 +1,13 @@
 import React from 'react'
 import Avatar from './Avatar'
 import './SidebarChat.css'
-import Message from '../chat/Message'
+
+const fTime = (toConvert) => {
+  const formatted = new Date(toConvert)
+  return (formatted.getHours() + ':' + formatted.getMinutes());
+}
+
+
 function SidebarChat(
   {username, displayName, cServer, lastMsg, lastMsgDate, profilePic, handleClick}) {
 
@@ -16,7 +22,7 @@ function SidebarChat(
             <h2 >{displayName}</h2>
             <h3> 
             <div className="text-muted">{lastMsg ? lastMsg : ""}</div>
-            <small className="text-muted" > {lastMsgDate ? lastMsgDate : ""}</small>
+            <small className="text-muted" > {lastMsgDate ? fTime(lastMsgDate) : ""}</small>
              </h3>
       </div>
     </div>

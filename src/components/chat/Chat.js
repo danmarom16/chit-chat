@@ -7,9 +7,12 @@ import UploadVideoModal from "./uploadFileModals/UploadVideoModal"
 import UploadRecordModal from "./uploadFileModals/UploadRecordModal"
 import { Dropdown } from "react-bootstrap";
 import {getDefualtImg} from '../DataBase'
-
-
 import api from '../WebApi'
+
+const fTime = (toConvert) => {
+  const formatted = new Date(toConvert)
+  return (formatted.getHours() + ':' + formatted.getMinutes());
+}
 
 function Chat({connection, loggedUser, forceUpdate, contact, newMsgTracker, getContact}) {
 
@@ -37,7 +40,7 @@ function Chat({connection, loggedUser, forceUpdate, contact, newMsgTracker, getC
     return (
       <Message
         content={message.content}
-        time={message.created}
+        time={fTime(message.created)}
         isSender={message.sent}
         type="text"
         key={key}
