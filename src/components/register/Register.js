@@ -4,7 +4,6 @@ import "./Register.css";
 import FormInput from '../formInput/FormInput'
 import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom"
-import {createNewUser} from "../DataBase.js"
 import { useNavigate } from 'react-router-dom';
 
 import api from '../WebApi'

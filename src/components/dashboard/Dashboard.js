@@ -20,11 +20,8 @@ function Dashboard({loggedUser}) {
       const hubConnection = new HubConnectionBuilder().withUrl("http://localhost:5241/chathub", {withCredentials: (false)}).build();
       setConnection(hubConnection);
       await hubConnection.start();
-      hubConnection.on("TriggerGetContacts", (sentUser) => {
-        var sentUserToString = JSON.parse(sentUser);
-        if(loggedUser.id === sentUserToString){
+      hubConnection.on("TriggerGetContacts", () => {
           forceUpdate();
-        }
       })
     } catch (err){
       console.log(err);

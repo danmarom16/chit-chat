@@ -5,8 +5,6 @@ import Avatar from "./Avatar";
 import NewContactModal from "./newContactModal";
 import { getDefualtImg } from "../DataBase";
 
-
-
 function Sidebar({loggedUser, handleSidebarClick , newMsgTracker, getContact, contacts}) {
   // contact = {id, name, server, last, lastdate}
 

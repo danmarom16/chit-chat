@@ -1,15 +1,5 @@
 import React, { useRef, useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
-import { isUsernameExists, addNewChat, getChats } from "../DataBase";
-  /*
-  if (!isUsernameExists(usernameRef.current.value)) {
-    alert("Username not found 404!");
-  } else if (usernameRef.current.value === myUsername) {
-    alert("Can't create chat with yourself");
-  } else if (myChats.includes(usernameRef.current.value)) {
-    alert("Chat already exists");
-  }
-  */
 
 import api from '../WebApi'
 

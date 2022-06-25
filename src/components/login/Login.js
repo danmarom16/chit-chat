@@ -4,7 +4,6 @@ import "./Login.css";
 import FormInput from "../formInput/FormInput";
 import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { checkLogin } from "../DataBase";
 import { useNavigate } from "react-router-dom";
 
 import api from "../WebApi";
